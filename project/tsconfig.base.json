@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@project/authentication": ["libs/account/authentication/src/index.ts"],
+      "@project/data-access": ["libs/data-access/src/index.ts"],
       "@project/shared-helpers": ["libs/shared-helpers/src/index.ts"],
       "@project/shared-types": ["libs/shared-types/src/index.ts"],
       "@project/user": ["libs/account/user/src/index.ts"]
