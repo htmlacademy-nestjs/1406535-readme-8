@@ -1,6 +1,6 @@
 export class CreateUserDto {
-  email: string;
-  fullName: string;
-  password: string;
-  avatar?: string;
+  public email: string;
+  public fullName: string;
+  public password: string;
+  public avatar?: string;
 }
