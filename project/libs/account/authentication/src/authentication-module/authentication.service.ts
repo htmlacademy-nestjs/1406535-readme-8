@@ -1,6 +1,6 @@
 import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UserEntity, UserRepository } from '@project/user';
-import { AUTH_USER_EXISTS, AUTH_USER_NOT_FOUND, AUTH_USER_PASSWORD_WRONG } from './authentication.constant';
+import { AuthenticationMessage, UserServiceMessage } from './authentication.constant';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from '../dto/login-user.dto';
 
@@ -16,7 +16,7 @@ export class AuthenticationService {
     const existUser = await this.userRepository.findByEmail(email);
 
     if (existUser) {
-      throw new ConflictException(AUTH_USER_EXISTS);
+      throw new ConflictException(UserServiceMessage.UserExist);
     }
 
     const user = { email, fullName, avatar, passwordHash: '' };
@@ -31,11 +31,11 @@ export class AuthenticationService {
     const existUser = await this.userRepository.findByEmail(email);
 
     if (!existUser) {
-      throw new NotFoundException(AUTH_USER_NOT_FOUND);
+      throw new NotFoundException(UserServiceMessage.UserNotFound);
     }
 
     if (!await existUser.checkPassword(password)) {
-      throw new UnauthorizedException(AUTH_USER_PASSWORD_WRONG);
+      throw new UnauthorizedException(AuthenticationMessage.LoggedError);
     }
 
     return existUser;
@@ -45,7 +45,7 @@ export class AuthenticationService {
     const existUser = await this.userRepository.findById(id);
 
     if (!existUser) {
-      throw new NotFoundException(AUTH_USER_NOT_FOUND);
+      throw new NotFoundException(UserServiceMessage.UserNotFound);
     }
 
     return existUser;
