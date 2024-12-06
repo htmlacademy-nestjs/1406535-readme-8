@@ -1,3 +1,11 @@
-export const AUTH_USER_EXISTS = 'User with such email exists';
-export const AUTH_USER_NOT_FOUND = 'User not found';
-export const AUTH_USER_PASSWORD_WRONG = 'User password is wrong';
+export const AuthenticationMessage = {
+  LoggedSuccess: 'User has been successfully logged',
+  LoggedError: 'Password/login is wrong',
+} as const;
+
+export const UserServiceMessage = {
+  UserFound: 'User found',
+  UserNotFound: 'User not found',
+  UserExist: 'User with such email already exists',
+  UserCreated: 'The new user has been successfully created',
+} as const;
