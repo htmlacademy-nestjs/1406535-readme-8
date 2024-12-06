@@ -14,7 +14,6 @@ async function bootstrap() {
     .setTitle('Account service API')
     .setDescription('Users and authentification routes and resources')
     .setVersion('1.0')
-    .addTag('account')
     .build();
 
   app.setGlobalPrefix(GLOBAL_PREFIX);

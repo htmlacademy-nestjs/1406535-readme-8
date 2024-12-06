@@ -23,5 +23,5 @@ export class CreateUserDto {
     description: 'User avatar (optional)',
     example: '/images/user.png'
   })
-  public avatar?: string;
+  public avatar: string;
 }
