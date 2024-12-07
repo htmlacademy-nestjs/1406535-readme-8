@@ -13,3 +13,10 @@ export const Default = {
   DefaultPort: 3000,
   MongoDefaultPort: 27017,
 } as const;
+
+export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
+
+export const ValidationInfo = {
+  AppConfigError: 'Application\'s configuration validaty error',
+  MongoConfigError: 'MongoDB configuration validaty error',
+} as const;
