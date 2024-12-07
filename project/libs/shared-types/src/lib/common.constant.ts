@@ -6,3 +6,10 @@ export const AccountInfo = {
   UserExist: 'User with such email already exists',
   UserCreated: 'The new user has been successfully created',
 } as const;
+
+export const Default = {
+  GlobalPrefix: 'api',
+  SpecificationPrefix: 'spec',
+  DefaultPort: 3000,
+  MongoDefaultPort: 27017,
+} as const;
