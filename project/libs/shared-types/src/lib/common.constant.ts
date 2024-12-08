@@ -17,12 +17,6 @@ export const Default = {
 export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
 
 export const ValidationInfo = {
-<<<<<<< HEAD
-  AppConfigError: 'Application\'s configuration validaty error',
-  MongoConfigError: 'MongoDB configuration validaty error',
-} as const;
-=======
   AppConfigError: 'Application configuration validaty error',
   MongodbConfigError: 'MongoDB configuration validaty error',
 }
->>>>>>> 8310ab1 (сделала конфиги для app и mongo, использую валидацию joi)
