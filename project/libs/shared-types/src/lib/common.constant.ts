@@ -17,8 +17,8 @@ export const Default = {
 export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
 
 export const ValidationInfo = {
-  AppConfigError: 'Application configuration validaty error',
-  MongodbConfigError: 'MongoDB configuration validaty error',
+  AppConfigError: 'Application configuration validity error',
+  MongodbConfigError: 'MongoDB configuration validity error',
 }
 
 export const MongodbInfo = {
