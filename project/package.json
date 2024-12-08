@@ -2,7 +2,11 @@
   "name": "@project/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start:account": "npx nx run account:serve",
+    "docker:up": "docker compose --file ./apps/account/docker-compose.dev.yml --project-name readme-account --env-file ./apps/account/account.env up -d",
+    "docker:down": "docker compose --file ./apps/account/docker-compose.dev.yml --project-name readme-account --env-file ./apps/account/account.env down -v"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^10.0.2",
