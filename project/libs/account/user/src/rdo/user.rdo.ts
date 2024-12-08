@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 
-export class LoggedUserRdo {
+export class UserRdo {
   @ApiProperty({
     description: 'The unique user ID',
     example: '134ce8babd-cc30-4805-9b12-d9420398e7c5',
@@ -17,9 +17,16 @@ export class LoggedUserRdo {
   public email: string;
 
   @ApiProperty({
-    description: 'User JWT token',
-    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+    description: 'User name with/without surname',
+    example: 'John Doe'
   })
   @Expose()
-  public token: string;
+  public fullName: string;
+
+  @ApiProperty({
+    description: 'User avatar (optional)',
+    example: '/images/user.png'
+  })
+  @Expose()
+  public avatar?: string;
 }

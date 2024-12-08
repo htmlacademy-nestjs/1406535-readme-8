@@ -1,30 +1,37 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { ApiResponse } from '@nestjs/swagger';
+import { AccountInfo } from '@project/shared-types';
 import { AuthenticationService } from './authentication.service';
-import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from '../dto/login-user.dto';
+import { LoggedUserRdo } from '../rdo/logged-user.rdo';
 
 @Controller('auth')
 export class AuthenticationController {
   constructor(
-    private readonly authService: AuthenticationService
+    private readonly authenticationService: AuthenticationService
   ) {}
 
-  @Post('register')
-  public async create(@Body() dto: CreateUserDto) {
-    const newUser = await this.authService.registerUser(dto);
-
-    return newUser.toPOJO();
-  }
-
+  @ApiResponse({
+    type: LoggedUserRdo,
+    status: HttpStatus.OK,
+    description: AccountInfo.LoggedSuccess,
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: AccountInfo.LoggedError,
+  })
   @Post('login')
   public async login(@Body() dto: LoginUserDto) {
-    const verifiedUser = await this.authService.verifyUser(dto);
+    const verifiedUser = await this.authenticationService.verifyUser(dto);
     return verifiedUser.toPOJO();
   }
 
-  @Get(':id')
-  public async show(@Param('id') id: string) {
-    const existUser = await this.authService.getUserById(id);
-    return existUser.toPOJO();
-  }
+  // @Get('login')
+  // public async login(@Body() dto: LoginUserDto) {
+  //   const verifiedUser = await this.authenticationService.verifyUser(dto);
+  //   return verifiedUser.toPOJO();
+  // }
+
+  // @Post('update')
+  // public async update() {}
 }
