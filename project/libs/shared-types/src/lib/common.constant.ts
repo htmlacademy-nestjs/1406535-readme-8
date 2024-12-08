@@ -20,3 +20,7 @@ export const ValidationInfo = {
   AppConfigError: 'Application configuration validaty error',
   MongodbConfigError: 'MongoDB configuration validaty error',
 }
+
+export const MongodbInfo = {
+  EntityNotFound: 'Entity not found',
+}

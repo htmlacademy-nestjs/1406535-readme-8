@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AccountConfigModule } from '@project/account-config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { AccountConfigModule, getMongooseOptions } from '@project/account-config';
 import { AuthenticationModule } from '@project/authentication';
 import { UserModule } from '@project/user';
 @Module({
@@ -7,6 +8,9 @@ import { UserModule } from '@project/user';
     UserModule,
     AuthenticationModule,
     AccountConfigModule,
+    MongooseModule.forRootAsync(
+      getMongooseOptions()
+    ),
   ],
   controllers: [],
   providers: [],

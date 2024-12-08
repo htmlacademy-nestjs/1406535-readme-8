@@ -1,19 +1,17 @@
 services:
-  readme.account.mongoDB:
-    image: mongo:4.4
-    restart: always
-    container_name: readme.account.mongoDB
 
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
       MONGO_INITDB_DATABASE: ${MONGO_DB}
-
     ports:
       - 27017:${MONGO_PORT}
-
     volumes:
-      - readme.account.mongoDB:/data/db
+      - volume:/data/db
 
 volumes:
-  readme.account.mongoDB:
+  volume:
