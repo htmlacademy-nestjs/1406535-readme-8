@@ -18,6 +18,12 @@ export class UserModel extends Document implements AuthUser {
 
   @Prop({ required: true })
   public passwordHash: string;
+
+  @Prop()
+  public posts: string[];
+
+  @Prop()
+  public subscribers: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(UserModel);

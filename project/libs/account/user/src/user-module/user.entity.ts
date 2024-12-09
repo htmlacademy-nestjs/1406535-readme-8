@@ -33,6 +33,8 @@ export class UserEntity extends Entity implements StorableEntity<AuthUser> {
         fullName: this.fullName,
         avatar: this.avatar,
         passwordHash: this.passwordHash,
+        posts: this.posts,
+        subscribers: this.subscribers,
       }
   }
 
