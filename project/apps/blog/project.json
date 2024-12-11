@@ -68,5 +68,6 @@
         "command": "npx ts-node seed.ts",
         "cwd": "libs/blog/models/prisma"
       }
+    }
   }
 }

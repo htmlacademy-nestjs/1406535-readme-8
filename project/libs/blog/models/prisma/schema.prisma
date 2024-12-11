@@ -20,7 +20,7 @@ model Post {
   userId    String
   authorId  String?
   published Boolean    @default(true)
-  isOrigin  Boolean    @default(true)
+  reposted  Boolean    @default(false)
   tags      Tag[]
   comments  Comment[]
   favorite  Favorite[]

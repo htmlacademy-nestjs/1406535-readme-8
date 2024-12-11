@@ -20,8 +20,16 @@ export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
 export const ValidationInfo = {
   AppConfigError: 'Application configuration validity error',
   MongodbConfigError: 'MongoDB configuration validity error',
-}
+} as const;
 
 export const MongodbInfo = {
   EntityNotFound: 'Entity not found',
-}
+} as const;
+
+export const PostTypes = {
+  Text: 'TEXT',
+  Video: 'VIDEO',
+  Quota: 'QUOTA',
+  Photo: 'PHOTO',
+  Link: 'LINK',
+} as const;
