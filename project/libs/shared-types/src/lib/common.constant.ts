@@ -12,6 +12,7 @@ export const Default = {
   SpecificationPrefix: 'spec',
   DefaultPort: 3000,
   MongoDefaultPort: 27017,
+  PosgresDefaultPort: 5432,
 } as const;
 
 export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
