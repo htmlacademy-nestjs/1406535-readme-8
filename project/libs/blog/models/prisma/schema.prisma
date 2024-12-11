@@ -9,18 +9,19 @@ datasource db {
 
 model Post {
   // При создании будут одинаковы, при репосте изменятся
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   originId  String?
   type      Type
   content   Json
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   // При создании будут одинаковы, при репосте изменятся
   userId    String
   authorId  String?
-  published Boolean  @default(true)
-  isOrigin  Boolean  @default(true)
+  published Boolean   @default(true)
+  isOrigin  Boolean   @default(true)
   tags      Tag[]
+  Comment   Comment[]
 
   @@index([authorId])
   @@map("posts")
@@ -31,6 +32,18 @@ model Tag {
   posts Post[]
 
   @@map("tags")
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  text      String
+  authorId  String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  postId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("comments")
 }
 
 enum Type {
