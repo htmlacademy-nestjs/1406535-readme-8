@@ -6,3 +6,37 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Post {
+  // При создании будут одинаковы, при репосте изменятся
+  id        String   @id @default(uuid())
+  originId  String?
+  type      Type
+  content   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // При создании будут одинаковы, при репосте изменятся
+  userId    String
+  authorId  String?
+  published Boolean  @default(true)
+  isOrigin  Boolean  @default(true)
+  tags      Tag[]
+
+  @@index([authorId])
+  @@map("posts")
+}
+
+model Tag {
+  name  String @id @unique
+  posts Post[]
+
+  @@map("tags")
+}
+
+enum Type {
+  TEXT
+  VIDEO
+  QUOTA
+  PHOTO
+  LINK
+}
