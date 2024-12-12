@@ -72,7 +72,7 @@
     "db-fill": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "nx run-many --target=db-migrate,db-reset,db-generate,db-seed --parallel=false",
+        "command": "npx prisma migrate reset --schema ./schema.prisma --force & npx ts-node seed.ts",
         "cwd": "libs/blog/models/prisma"
       }
     }
