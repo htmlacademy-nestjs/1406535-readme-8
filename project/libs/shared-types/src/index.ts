@@ -9,6 +9,5 @@ export { PhotoPost } from './lib/photo-post.interface';
 export { QuotaPost } from './lib/quota-post.interface';
 export { TextPost } from './lib/text-post.interface';
 export { VideoPost } from './lib/video-post.interface';
-export { PostType } from './lib/post-type';
 export { Post } from './lib/post.interface';
 export * from './lib/common.constant';

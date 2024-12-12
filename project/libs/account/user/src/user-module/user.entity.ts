@@ -6,7 +6,6 @@ export class UserEntity extends Entity implements StorableEntity<AuthUser> {
   public email: string;
   public fullName: string;
   public avatar?: string;
-  public posts: string[] = [];
   public subscribers: string[] = [];
   public passwordHash: string;
 
@@ -33,7 +32,6 @@ export class UserEntity extends Entity implements StorableEntity<AuthUser> {
         fullName: this.fullName,
         avatar: this.avatar,
         passwordHash: this.passwordHash,
-        posts: this.posts,
         subscribers: this.subscribers,
       }
   }
