@@ -7,6 +7,12 @@ export const AccountInfo = {
   UserCreated: 'The new user has been successfully created',
 } as const;
 
+export const BlogInfo = {
+  CommentCreated: 'The new comment has been successfully created',
+  CommentFound: 'Comment found',
+  CommentNotFound: 'Comment not found',
+} as const;
+
 export const Default = {
   GlobalPrefix: 'api',
   SpecificationPrefix: 'spec',
