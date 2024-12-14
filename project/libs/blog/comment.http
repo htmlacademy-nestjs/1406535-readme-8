@@ -1,0 +1,41 @@
+# Create a comment
+POST http://localhost:3000/api/comments/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "postId": "423d625f-1301-4013-8383-9aabfada8e58",
+  "text": "second one",
+  "authorId": "949ff92f-60e1-4525-b822-2be78169c25b"
+}
+
+###
+
+# Get comment by ID
+GET http://localhost:3000/api/comments/fa298d24-0e96-4dac-ad08-11ac89302060 HTTP/1.1
+
+###
+
+# Update comment by ID
+PATCH http://localhost:3000/api/comments/9291c0d0-f0df-44f6-8a84-0fe873affdd6 HTTP/1.1
+Content-Type: application/json
+
+{
+  "postId": "949ff92f-60e1-4525-b822-2be78169c25b",
+  "text": "Updated text"
+}
+###
+
+# Delete comment by ID
+DELETE http://localhost:3000/api/comments/9291c0d0-f0df-44f6-8a84-0fe873adfdd6 HTTP/1.1
+
+###
+
+# Get all comments by post ID
+GET http://localhost:3000/api/comments/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "postId": "b7014f26-43fb-4468-9acc-f09152f58f72"
+}
+
+###
