@@ -20,7 +20,7 @@ export class DetailUserRdo {
     description: 'User registration date',
     example: '2016-05-18T16:00:00Z'
   })
-  @Expose({ name: 'CreateAt'})
+  @Expose({ name: 'createAt'})
   public registered: Date;
 
   @ApiProperty({
