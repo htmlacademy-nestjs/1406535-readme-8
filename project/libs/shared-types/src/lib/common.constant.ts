@@ -39,3 +39,8 @@ export const PostTypes = {
   Photo: 'PHOTO',
   Link: 'LINK',
 } as const;
+
+export const SortDirection = {
+  Asc: 'asc',
+  Desc: 'desc',
+} as const;

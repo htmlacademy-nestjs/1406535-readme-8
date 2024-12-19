@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
 import { fillDto } from '@project/shared-helpers';
 import { CommentRdo } from '../rdo/comment.rdo';
 import { CreateCommentDto } from '../dto/create-comment.dto';
@@ -34,27 +34,41 @@ export class CommentController {
   @ApiResponse({
     type: CommentRdo,
     status: HttpStatus.OK,
-    description: BlogInfo.CommentFound,
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
     description: BlogInfo.CommentNotFound,
   })
   @Get(':id')
-  public async show(@Param('id') id: string) {
+  public async show(@Param('id', ParseUUIDPipe) id: string) {
     const comment = await this.commentService.findOne(id);
     return fillDto(CommentRdo, comment);
   }
 
+  @ApiResponse({
+    type: CommentRdo,
+    status: HttpStatus.OK,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: BlogInfo.CommentNotFound,
+  })
   @Patch(':id')
-  public async update(@Param('id') id: string, @Body() dto: UpdateCommentDto) {
+  public async update(@Param('id', ParseUUIDPipe) id: string, @Body() dto: UpdateCommentDto) {
     const comment = await this.commentService.update(id, dto);
     return fillDto(CommentRdo, comment);
   }
 
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: BlogInfo.CommentNotFound,
+  })
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  public async delete(@Param('id') id: string) {
+  public async delete(@Param('id', ParseUUIDPipe) id: string) {
     await this.commentService.delete(id);
   }
 }
