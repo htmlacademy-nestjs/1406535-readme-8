@@ -26,10 +26,12 @@ export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
 export const ValidationInfo = {
   AppConfigError: 'Application configuration validity error',
   MongodbConfigError: 'MongoDB configuration validity error',
+  PipeImproperUsage: 'This pipe must used only with params!',
 } as const;
 
 export const MongodbInfo = {
   EntityNotFound: 'Entity not found',
+  InvalidID: 'Bad entity ID',
 } as const;
 
 export const PostTypes = {
