@@ -31,7 +31,7 @@ export const ValidationInfo = {
 
 export const MongodbInfo = {
   EntityNotFound: 'Entity not found',
-  InvalidID: 'Bad entity ID',
+  InvalidID: 'Validation failed (mongoId is expected)',
 } as const;
 
 export const PostTypes = {

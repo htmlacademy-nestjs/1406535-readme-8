@@ -5,6 +5,7 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UserRdo } from '../rdo/user.rdo';
 import { UserService } from './user.service';
 import { DetailUserRdo } from '../rdo/detail-user.rdo';
+import { MongoIdValidationPipe } from '@project/shared-pipes';
 
 @Controller('users')
 export class UserController {
@@ -38,7 +39,7 @@ export class UserController {
     description: AccountInfo.UserNotFound,
   })
   @Get(':id')
-  public async show(@Param('id') id: string) {
+  public async show(@Param('id', MongoIdValidationPipe) id: string) {
     const existUser = await this.userService.getById(id);
     return existUser.toPOJO();
   }
