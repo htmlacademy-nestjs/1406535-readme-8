@@ -25,7 +25,7 @@ model Post {
   comments  Comment[]
   favorite  Favorite[]
 
-  @@index([authorId])
+  @@index([userId, id])
   @@map("posts")
 }
 

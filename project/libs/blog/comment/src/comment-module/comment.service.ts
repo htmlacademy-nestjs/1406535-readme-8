@@ -7,26 +7,27 @@ import { UpdateCommentDto } from '../dto/update-comment.dto';
 export class CommentService {
   constructor(private blogService: PrismaClientService) {}
 
-  create(dto: CreateCommentDto) {
+  public async create(dto: CreateCommentDto) {
     return this.blogService.comment.create({ data: dto });
   }
 
-  findAll(postId: string) {
+  public async findAll(postId: string) {
+    await this.blogService.post.findUniqueOrThrow({ where: { id: postId } });
     return this.blogService.comment.findMany({ where: { postId } });
   }
 
-  findOne(id: string) {
+  public async findOne(id: string) {
     return this.blogService.comment.findUnique({ where: { id } });
   }
 
-  update(id: string, dto: UpdateCommentDto) {
+  public async update(id: string, dto: UpdateCommentDto) {
     return this.blogService.comment.update({
       where: { id },
       data: dto,
     });
   }
 
-  delete(id: string) {
+  public async delete(id: string) {
     return this.blogService.comment.delete({ where: { id } });
   }
 }
