@@ -1,16 +1,22 @@
-export const AccountInfo = {
+export const ApiResponseMessage = {
   LoggedSuccess: 'User has been successfully logged',
   LoggedError: 'Password/login is wrong',
+  NonLogged: 'Authorization required',
+  Forbidden: 'Access denied',
+  UserCreated: 'The new user has been successfully created',
   UserFound: 'User found',
   UserNotFound: 'User not found',
   UserExist: 'User with such email already exists',
-  UserCreated: 'The new user has been successfully created',
-} as const;
-
-export const BlogInfo = {
   CommentCreated: 'The new comment has been successfully created',
+  CommentsFound: 'Comments for all posts/required post found',
   CommentFound: 'Comment found',
   CommentNotFound: 'Comment not found',
+  CommentDeleted: 'Comment has been successfully deleted',
+  CommentUpdated: 'Comment has been successfully updated',
+  PostFound: 'Post found',
+  PostNotFound: 'Post not found',
+  ServerError: 'Internal server error',
+  InvalidID: 'Invalid ID (uuid is expected)',
 } as const;
 
 export const Default = {

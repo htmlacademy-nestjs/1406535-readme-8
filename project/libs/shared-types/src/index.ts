@@ -11,4 +11,5 @@ export { TextPost } from './lib/text-post.interface';
 export { VideoPost } from './lib/video-post.interface';
 export { Post } from './lib/post.interface';
 export { PaginationResult } from './lib/pagination-result.interface';
+export { Query } from './lib/query.interface';
 export * from './lib/common.constant';

@@ -1,6 +1,4 @@
-import { Entity } from './entity';
-
-export interface PaginationResult<T extends Entity> {
+export interface PaginationResult<T> {
   entities: T[];
   totalPages: number;
   totalItems: number;
