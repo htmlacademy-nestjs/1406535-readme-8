@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UserEntity, UserRepository } from '@project/user';
-import { AccountInfo } from '@project/shared-types';
+import { ApiResponseMessage } from '@project/shared-types';
 import { LoginUserDto } from '../dto/login-user.dto';
 
 @Injectable()
@@ -14,11 +14,11 @@ export class AuthenticationService {
     const existUser = await this.userRepository.findByEmail(email);
 
     if (!existUser) {
-      throw new NotFoundException(AccountInfo.UserNotFound);
+      throw new NotFoundException(ApiResponseMessage.UserNotFound);
     }
 
     if (!await existUser.checkPassword(password)) {
-      throw new UnauthorizedException(AccountInfo.LoggedError);
+      throw new UnauthorizedException(ApiResponseMessage.LoggedError);
     }
 
     return existUser;
