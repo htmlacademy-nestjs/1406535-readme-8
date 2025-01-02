@@ -52,3 +52,9 @@ export const SortDirection = {
   Asc: 'asc',
   Desc: 'desc',
 } as const;
+
+export const SortType = {
+  Date: 'time',
+  Favorite: 'like',
+  Discussed: 'comment',
+} as const;
