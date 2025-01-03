@@ -3,7 +3,7 @@ POST http://localhost:3000/api/comments/ HTTP/1.1
 Content-Type: application/json
 
 {
-  "postId": "2fd35496-c6fd-4a21-bbf5-e0ada55dc810",
+  "postId": "690266ce-d105-4703-97b7-33c4b87e5bf5",
   "text": "New one is not enoth)",
   "authorId": "676428b948541ea480d114fb"
 }
@@ -16,18 +16,16 @@ GET http://localhost:3000/api/comments/fa298d24-0e96-4dac-ad08-11ac89302060 HTTP
 ###
 
 # Update comment by ID
-PATCH http://localhost:3000/api/comments/03fc9404-8aba-47ab-ba59-48aaecb83a45 HTTP/1.1
+PATCH http://localhost:3000/api/comments/adebb020-69b5-4c20-8e91-d9d28667134b HTTP/1.1
 Content-Type: application/json
 
 {
-  "id": "03fc9404-8aba-47ab-ba59-48aaecb83a45",
-  "postId": "2fd35496-c6fd-4a21-bbf5-e0ada55dc810",
   "text": "Updated text"
 }
 ###
 
 # Delete comment by ID
-DELETE http://localhost:3000/api/comments/9b83aa3a-4fb5-49be-b4fc-b57418e8e139 HTTP/1.1
+DELETE http://localhost:3000/api/comments/adebb020-69b5-4c20-8e91-d9d28667134b HTTP/1.1
 
 ###
 
