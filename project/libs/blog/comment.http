@@ -3,8 +3,8 @@ POST http://localhost:3000/api/comments/ HTTP/1.1
 Content-Type: application/json
 
 {
-  "postId": "690266ce-d105-4703-97b7-33c4b87e5bf5",
-  "text": "New one is not enoth)",
+  "postId": "8a1acb92-d765-4c5d-a1ef-aaef57c7cc5d",
+  "text": "Second One",
   "authorId": "676428b948541ea480d114fb"
 }
 
@@ -31,7 +31,7 @@ DELETE http://localhost:3000/api/comments/adebb020-69b5-4c20-8e91-d9d28667134b H
 
 # Get all comments by post ID
 # You can specify page, limit ad sort direction as well
-GET http://localhost:3000/api/comments?postId=4ee1d10b-81fd-4370-b0a4-849c92476c53&limit=3&page=1 HTTP/1.1
+GET http://localhost:3000/api/comments?postId=8a1acb92-d765-4c5d-a1ef-aaef57c7cc5d&limit=3&page=1 HTTP/1.1
 
 ###
 

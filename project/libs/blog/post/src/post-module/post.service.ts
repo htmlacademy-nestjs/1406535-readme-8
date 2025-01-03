@@ -87,7 +87,10 @@ export class PostService {
 
   public async findById(id: string): Promise<Post> {
     try {
-      const existPost = await this.blogService.post.findUnique({ where: { id } });
+      const existPost = await this.blogService.post.findUniqueOrThrow({
+        where: { id },
+        include: { comments: true, likes: true },
+      });
       return existPost;
     } catch {
       throw new NotFoundException(ApiResponseMessage.PostNotFound);

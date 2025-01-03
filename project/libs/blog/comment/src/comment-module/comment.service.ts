@@ -20,7 +20,7 @@ export class CommentService {
 
   private async verifyPostById(id: string): Promise<void> {
     try {
-      await this.blogService.post.findUnique({ where: { id } });
+      await this.blogService.post.findUniqueOrThrow({ where: { id } });
     } catch {
       throw new NotFoundException(ApiResponseMessage.PostNotFound);
     }
@@ -72,7 +72,7 @@ export class CommentService {
 
   public async findById(id: string): Promise<Comment> {
     try {
-      const existComment = await this.blogService.comment.findUnique({ where: { id } });
+      const existComment = await this.blogService.comment.findUniqueOrThrow({ where: { id } });
       return existComment;
     } catch {
       throw new NotFoundException(ApiResponseMessage.CommentNotFound);

@@ -1,4 +1,5 @@
 import { PostTypes } from './common.constant';
+import { Comment } from './comment.interface';
 
 export interface Post {
   id?: string;

@@ -23,7 +23,7 @@ model Post {
   reposted  Boolean    @default(false)
   tags      Tag[]
   comments  Comment[]
-  favorite  Favorite[]
+  likes     Favorite[]
 
   @@index([userId, id])
   @@map("posts")

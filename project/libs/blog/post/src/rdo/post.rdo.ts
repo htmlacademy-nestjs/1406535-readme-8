@@ -1,6 +1,5 @@
 import { PostTypes } from '@project/shared-types';
-import { Expose, Transform, Type } from 'class-transformer';
-import { CommentRdo } from 'libs/blog/comment/src/rdo/comment.rdo';
+import { Expose, Transform } from 'class-transformer';
 
 export class PostRdo {
   @Expose()
@@ -13,8 +12,12 @@ export class PostRdo {
   public tags: string[];
 
   @Expose()
-  @Type(() => CommentRdo)
-  public comments: Comment[];
+  @Transform(({ value }) => value.length || null)
+  public comments: number;
+
+  @Expose()
+  @Transform(({ value }) => value.length || null)
+  public likes: number;
 
   @Expose()
   public createdAt: Date;
@@ -22,4 +25,7 @@ export class PostRdo {
   @Expose()
   @Transform(({ value }) => JSON.parse(value))
   public content: unknown;
+
+  @Expose()
+  public published: boolean;
 }

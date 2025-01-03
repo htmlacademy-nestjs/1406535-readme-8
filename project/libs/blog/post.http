@@ -17,7 +17,7 @@ GET http://localhost:3000/api/posts HTTP/1.1
 ###
 
 # Get post by ID
-GET http://localhost:3000/api/posts/690266ce-d105-4703-97b7-33c4b87e5bf5 HTTP/1.1
+GET http://localhost:3000/api/posts/8a1acb92-d765-4c5d-a1ef-aaef57c7cc5d HTTP/1.1
 
 ###
 
@@ -35,6 +35,6 @@ Content-Type: application/json
 ###
 
 # Delete post by ID
-DELETE http://localhost:3000/api/posts/4200e058-a88e-4c54-b622-bd47d9bb2d5c HTTP/1.1
+DELETE http://localhost:3000/api/posts/59cb6c5c-18f6-4eb0-8fbf-84f3b45ce896 HTTP/1.1
 
 ###
