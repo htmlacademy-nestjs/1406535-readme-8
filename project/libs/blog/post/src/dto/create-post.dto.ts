@@ -7,17 +7,17 @@ const YOUTUBE_REGEXP = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?
 const SPACE_SIGN = ' ';
 
 export class CreatePostDto {
-  // @ApiProperty({
-  //   description: 'One of post type: video, text, link, quota, photo',
-  //   example: 'VIDEO'
-  // })
+  @ApiProperty({
+    description: 'One of post type: video, text, link, quota, photo',
+    example: 'VIDEO'
+  })
   @IsIn(Object.values(PostTypes))
   public type: (typeof PostTypes)[keyof typeof PostTypes];
 
-  // @ApiProperty({
-  //   description: 'One of post type: video, text, link, quota, photo',
-  //   example: 'VIDEO'
-  // })
+  @ApiProperty({
+    description: 'The unique user ID',
+    example: '676428b948541ea480d114fb',
+  })
   @IsMongoId()
   @IsOptional()
   public userId?: string;
@@ -96,18 +96,18 @@ export class CreatePostDto {
   @Length(100, 1024)
   public textContent: string;
 
-  // @ApiProperty({
-  //   description: 'Funny ',
-  //   example: 'https://ya.ru/'
-  // })
+  @ApiProperty({
+    description: 'Video description',
+    example: 'Funny cats'
+  })
   @ValidateIf(obj => obj.type === PostTypes.Video)
   @IsString()
   @Length(20, 50)
   public videoTitle: string;
 
   @ApiProperty({
-    description: 'Optional text description for link',
-    example: 'https://ya.ru/'
+    description: 'YouTube video link URL',
+    example: 'https://www.youtube.com/watch?v=F6va6tg62qg'
   })
   @ValidateIf(obj => obj.type === PostTypes.Video)
   @IsUrl()
