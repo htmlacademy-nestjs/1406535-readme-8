@@ -1,13 +1,31 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { PrismaClientService } from '@project/blog-models';
-import { ApiResponseMessage, Comment, PaginationResult, Post } from '@project/shared-types';
+import { ApiResponseMessage, PaginationResult, Post, PostTypes } from '@project/shared-types';
 import { Prisma } from '@prisma/client';
 import { PostQuery } from './post.query';
 import { CreatePostDto } from '../dto/create-post.dto';
+import { UpdatePostDto } from '../dto/update-post.dto';
 
 @Injectable()
 export class PostService {
   constructor(private blogService: PrismaClientService) {}
+
+  private joinContentToJson(dto: CreatePostDto | UpdatePostDto): string {
+    switch(dto.type) {
+      case PostTypes.Link:
+        return JSON.stringify({ description: dto.linkDescription, url: dto.linkUrl });
+      case PostTypes.Photo:
+        return JSON.stringify({ url: dto.photoUrl });
+      case PostTypes.Text:
+        return JSON.stringify({ title: dto.textTitle, description: dto.textDescription, content: dto.textContent });
+      case PostTypes.Quota:
+        return JSON.stringify({ author: dto.quotaAuthor, text: dto.quotaText });
+      case PostTypes.Video:
+        return JSON.stringify({ title: dto.videoTitle, url: dto.videoUrl });
+      default:
+        throw new BadRequestException(ApiResponseMessage.BadData);
+    }
+  }
 
   // private async сountAll(where: Prisma.CommentWhereInput): Promise<number> {
   //   return this.blogService.comment.count({ where });
@@ -17,24 +35,18 @@ export class PostService {
   //   return Math.ceil(totalCount / limit);
   // }
 
-  // private async verifyPostById(id: string): Promise<void> {
-  //   try {
-  //     await this.blogService.post.findUnique({ where: { id } });
-  //   } catch {
-  //     throw new NotFoundException(ApiResponseMessage.PostNotFound);
-  //   }
-  // }
+  public async create(dto: CreatePostDto): Promise<Post> {
+    const content = this.joinContentToJson(dto);
 
-  // public async create(dto: CreatePostDto): Promise<Post> {
-  //   await this.verifyPostById(dto.postId);
-
-  //   try {
-  //     const newComment = await this.blogService.comment.create({ data: dto });
-  //     return newComment;
-  //   } catch {
-  //     throw new InternalServerErrorException(ApiResponseMessage.ServerError);
-  //   }
-  // }
+    try {
+      const newPost = await this.blogService.post.create({
+        data: { type: dto.type, userId: dto.userId, content }
+      });
+      return newPost;
+    } catch {
+      throw new InternalServerErrorException(ApiResponseMessage.ServerError);
+    }
+  }
 
   public async findAll() {
     return this.blogService.post.findMany();
@@ -73,34 +85,35 @@ export class PostService {
   //   }
   // }
 
-  // public async findById(id: string): Promise<Comment> {
-  //   try {
-  //     const existComment = await this.blogService.comment.findUnique({ where: { id } });
-  //     return existComment;
-  //   } catch {
-  //     throw new NotFoundException(ApiResponseMessage.CommentNotFound);
-  //   }
-  // }
+  public async findById(id: string): Promise<Post> {
+    try {
+      const existPost = await this.blogService.post.findUnique({ where: { id } });
+      return existPost;
+    } catch {
+      throw new NotFoundException(ApiResponseMessage.PostNotFound);
+    }
+  }
 
-  // public async update(id: string, dto: UpdateCommentDto): Promise<Comment> {
-  //   await this.findById(id);
+  public async update(id: string, dto: UpdatePostDto): Promise<Post> {
+    await this.findById(id);
+    const content = this.joinContentToJson(dto);
 
-  //   try {
-  //     const updatedComment = await this.blogService.comment.update({
-  //       where: { id },
-  //       data: dto,
-  //     });
-  //     return updatedComment;
-  //   } catch {
-  //     throw new InternalServerErrorException(ApiResponseMessage.ServerError);
-  //   }
-  // }
+    try {
+      const updatedPost = await this.blogService.post.update({
+        where: { id },
+        data: { type: dto.type, userId: dto.userId, content },
+      });
+      return updatedPost;
+    } catch {
+      throw new InternalServerErrorException(ApiResponseMessage.ServerError);
+    }
+  }
 
-  // public async delete(id: string): Promise<void> {
-  //   try {
-  //     await this.blogService.comment.delete({ where: { id } });
-  //   } catch {
-  //     throw new InternalServerErrorException(ApiResponseMessage.ServerError);
-  //   }
-  // }
+  public async delete(id: string): Promise<void> {
+    try {
+      await this.blogService.post.delete({ where: { id } });
+    } catch {
+      throw new InternalServerErrorException(ApiResponseMessage.ServerError);
+    }
+  }
 }

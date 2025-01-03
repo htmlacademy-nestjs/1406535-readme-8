@@ -12,18 +12,17 @@ export class CreatePostDto {
   //   example: 'VIDEO'
   // })
   @IsIn(Object.values(PostTypes))
-  public type: typeof PostTypes;
+  public type: (typeof PostTypes)[keyof typeof PostTypes];
 
   // @ApiProperty({
   //   description: 'One of post type: video, text, link, quota, photo',
   //   example: 'VIDEO'
   // })
-  @IsOptional()
   @IsMongoId()
+  @IsOptional()
   public userId?: string;
 
   //Должен начинаться с буквы
-  @IsOptional()
   @IsArray()
   @IsString({ each: true })
   @Length(3, 10, { each: true })
@@ -31,6 +30,7 @@ export class CreatePostDto {
   @Transform(({ value }) => value.map(item => item.toLowerCase()))
   @Transform(({ value }) => Array.from(new Set(value)))
   @ArrayMaxSize(8)
+  @IsOptional()
   public tags: string[];
 
   @ApiProperty({
@@ -46,9 +46,9 @@ export class CreatePostDto {
     example: 'Advanced multilingual search engine'
   })
   @ValidateIf(obj => obj.type === PostTypes.Link)
-  @IsOptional()
   @IsString()
   @MaxLength(300)
+  @IsOptional()
   public linkDescription: string;
 
   @ApiProperty({

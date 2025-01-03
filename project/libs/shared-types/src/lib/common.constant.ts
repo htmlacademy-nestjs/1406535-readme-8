@@ -13,10 +13,14 @@ export const ApiResponseMessage = {
   CommentNotFound: 'Comment not found',
   CommentDeleted: 'Comment has been successfully deleted',
   CommentUpdated: 'Comment has been successfully updated',
+  PostCreated: 'The new post has been successfully created',
   PostFound: 'Post found',
   PostNotFound: 'Post not found',
+  PostDeleted: 'Post has been successfully deleted',
+  PostUpdated: 'Post has been successfully updated',
   ServerError: 'Internal server error',
   InvalidID: 'Invalid ID (uuid is expected)',
+  BadData: 'Wrong data',
 } as const;
 
 export const Default = {

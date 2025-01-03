@@ -1,3 +1,21 @@
+# Create new post
+POST http://localhost:3000/api/posts/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": "676428b948541ea480d114fb",
+  "type": "QUOTA",
+  "quotaAuthor": "Jack London",
+  "quotaText": "Real purpose of the person — to live, instead of to exist"
+}
+
+###
+
+# Get posts by ID
+GET http://localhost:3000/api/posts/4200e058-a88e-4c54-b622-bd47d9bb2d5c HTTP/1.1
+
+###
+
 # Get all posts
 GET http://localhost:3000/api/posts HTTP/1.1
 

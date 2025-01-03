@@ -8,6 +8,7 @@ export interface Post {
   userId: string;
   published: boolean;
   reposted: boolean;
-  tags: string[];
-  comments: Comment[];
+  content: unknown;
+  tags?: string[];
+  comments?: Comment[];
 }
