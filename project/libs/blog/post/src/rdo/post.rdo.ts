@@ -32,7 +32,7 @@ export class PostRdo {
     example: 15
   })
   @Expose()
-  @Transform(({ value }) => value.length || 0)
+  @Transform(({ value }) => value?.length || 0)
   public comments: number;
 
   @ApiProperty({
@@ -40,7 +40,7 @@ export class PostRdo {
     example: 500
   })
   @Expose()
-  @Transform(({ value }) => value.length || 0)
+  @Transform(({ value }) => value?.length || 0)
   public likes: number;
 
   @ApiProperty({
@@ -52,7 +52,7 @@ export class PostRdo {
 
   @ApiProperty({
     description: 'Content object (depends on post.type)',
-    example: '"quotaText": "Knowledge is power.", \n"quotaAuthor": "Sir Francis Bacon"'
+    example: 'videoTitle: Funny cats, videoUrl: https://www.youtube.com/watch?v=F6va6tg62qg'
   })
   @Expose()
   @Transform(({ value }) => JSON.parse(value))

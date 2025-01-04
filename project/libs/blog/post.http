@@ -11,6 +11,11 @@ Content-Type: application/json
 
 ###
 
+# Get posts with some limits
+GET http://localhost:3000/api/posts?type=QUOTA HTTP/1.1
+
+###
+
 # Get all posts
 GET http://localhost:3000/api/posts HTTP/1.1
 

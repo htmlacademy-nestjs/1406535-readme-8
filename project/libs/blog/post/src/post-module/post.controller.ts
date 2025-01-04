@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Patch, Post, Query } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiForbiddenResponse, ApiInternalServerErrorResponse, ApiNoContentResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { fillDto } from '@project/shared-helpers';
 import { PostRdo } from '../rdo/post.rdo';
@@ -6,6 +6,8 @@ import { PostService } from './post.service';
 import { CreatePostDto } from '../dto/create-post.dto';
 import { UpdatePostDto } from '../dto/update-post.dto';
 import { ApiResponseMessage } from '@project/shared-types';
+import { PostWithPaginationRdo } from '../rdo/post-with-pagination.rdo';
+import { PostQuery } from './post.query';
 
 @Controller('posts')
 @ApiTags('posts')
@@ -24,13 +26,13 @@ export class PostController {
     return fillDto(PostRdo, newPost);
   }
 
-  @ApiOkResponse({ type: PostRdo, description: ApiResponseMessage.PostFound })
+  @ApiOkResponse({ type: PostWithPaginationRdo, description: ApiResponseMessage.PostFound })
   @ApiNotFoundResponse({ description: ApiResponseMessage.PostNotFound })
   @ApiInternalServerErrorResponse({ description: ApiResponseMessage.ServerError })
   @Get('/')
-  public async index() {
-    const posts =  await this.postService.findAll();
-    return fillDto(PostRdo, posts);
+  public async index(@Query() query: PostQuery) {
+    const posts =  await this.postService.findAll(query);
+    return fillDto(PostWithPaginationRdo, posts);
   }
 
   @ApiOkResponse({ type: PostRdo, description: ApiResponseMessage.PostFound })

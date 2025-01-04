@@ -27,13 +27,13 @@ export class PostService {
     }
   }
 
-  // private async сountAll(where: Prisma.CommentWhereInput): Promise<number> {
-  //   return this.blogService.comment.count({ where });
-  // }
+  private async сountAll(where: Prisma.PostWhereInput): Promise<number> {
+    return this.blogService.post.count({ where });
+  }
 
-  // private calculatePages(totalCount: number, limit: number): number {
-  //   return Math.ceil(totalCount / limit);
-  // }
+  private calculatePages(totalCount: number, limit: number): number {
+    return Math.ceil(totalCount / limit);
+  }
 
   public async create(dto: CreatePostDto): Promise<Post> {
     const content = this.joinContentToJson(dto);
@@ -48,42 +48,37 @@ export class PostService {
     }
   }
 
-  public async findAll() {
-    return this.blogService.post.findMany();
+  public async findAll(query?: PostQuery): Promise<PaginationResult<Post>> {
+    const skip = query?.page && query?.limit ? (query.page - 1) * query.limit : undefined;
+    const take = query?.limit;
+    const where: Prisma.PostWhereInput = {};
+    const orderBy: Prisma.PostOrderByWithRelationInput = {};
+
+    if (query?.sortDirection) {
+      orderBy.createdAt = query.sortDirection;
+    }
+
+    if (query?.type) {
+      where.type = query.type;
+    }
+
+    const [records, count] = await Promise.all([
+      this.blogService.post.findMany({ where, orderBy, skip, take }),
+      this.сountAll(where),
+    ]);
+
+    if (count < query?.page) {
+      throw new NotFoundException(ApiResponseMessage.PostNotFound);
+    }
+
+    return {
+      entities: records,
+      totalPages: this.calculatePages(count, take),
+      totalItems: count,
+      currentPage: query?.page,
+      itemsPerPage: take,
+    }
   }
-
-  // public async findAll(query?: PostQuery): Promise<PaginationResult<Post>> {
-  //   const skip = query?.page && query?.limit ? (query.page - 1) * query.limit : undefined;
-  //   const take = query?.limit;
-  //   const where: Prisma.CommentWhereInput = {};
-  //   const orderBy: Prisma.CommentOrderByWithRelationInput = {};
-
-  //   if (query?.postId) {
-  //     await this.verifyPostById(query.postId);
-  //     where.postId = query.postId;
-  //   }
-
-  //   if (query?.sortDirection) {
-  //     orderBy.createdAt = query.sortDirection;
-  //   }
-
-  //   const [records, count] = await Promise.all([
-  //     this.blogService.comment.findMany({ where, orderBy, skip, take }),
-  //     this.сountAll(where),
-  //   ]);
-
-  //   if (count < query?.page) {
-  //     throw new NotFoundException(ApiResponseMessage.CommentNotFound);
-  //   }
-
-  //   return {
-  //     entities: records,
-  //     totalPages: this.calculatePages(count, take),
-  //     totalItems: count,
-  //     currentPage: query?.page,
-  //     itemsPerPage: take,
-  //   }
-  // }
 
   public async findById(id: string): Promise<Post> {
     try {
