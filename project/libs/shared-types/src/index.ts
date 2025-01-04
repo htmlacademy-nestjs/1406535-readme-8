@@ -7,4 +7,6 @@ export { Comment } from './lib/comment.interface';
 export { Post } from './lib/post.interface';
 export { PaginationResult } from './lib/pagination-result.interface';
 export { Query } from './lib/query.interface';
+export { TokenPayload } from './lib/token-payload.interface';
+export { Token } from './lib/token.interface';
 export * from './lib/common.constant';
