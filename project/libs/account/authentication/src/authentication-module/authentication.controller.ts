@@ -4,7 +4,6 @@ import { AuthenticationService } from './authentication.service';
 import { LoginUserDto } from '../dto/login-user.dto';
 import { LoggedUserRdo } from '../rdo/logged-user.rdo';
 import { ApiResponseMessage } from '@project/shared-types';
-
 @Controller('auth')
 export class AuthenticationController {
   constructor(

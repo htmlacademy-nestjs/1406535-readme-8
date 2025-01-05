@@ -57,10 +57,6 @@ export class CommentService {
       this.сountAll(where),
     ]);
 
-    if (count < query?.page) {
-      throw new NotFoundException(ApiResponseMessage.CommentNotFound);
-    }
-
     return {
       entities: records,
       totalPages: this.calculatePages(count, take),

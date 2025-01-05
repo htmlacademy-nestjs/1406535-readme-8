@@ -27,7 +27,6 @@ export class PostController {
   }
 
   @ApiOkResponse({ type: PostWithPaginationRdo, description: ApiResponseMessage.PostFound })
-  @ApiNotFoundResponse({ description: ApiResponseMessage.PostNotFound })
   @ApiInternalServerErrorResponse({ description: ApiResponseMessage.ServerError })
   @Get('/')
   public async index(@Query() query: PostQuery) {

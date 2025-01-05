@@ -67,10 +67,6 @@ export class PostService {
       this.сountAll(where),
     ]);
 
-    if (count < query?.page) {
-      throw new NotFoundException(ApiResponseMessage.PostNotFound);
-    }
-
     return {
       entities: records,
       totalPages: this.calculatePages(count, take),

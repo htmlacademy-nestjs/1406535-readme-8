@@ -19,6 +19,7 @@ export const ApiResponseMessage = {
   PostDeleted: 'Post has been successfully deleted',
   PostUpdated: 'Post has been successfully updated',
   ServerError: 'Internal server error',
+  TokenGenerationError: 'Token generation error',
   InvalidID: 'Invalid ID (uuid is expected)',
   BadData: 'Wrong data',
 } as const;
@@ -36,6 +37,7 @@ export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
 export const ValidationInfo = {
   AppConfigError: 'Application configuration validity error',
   MongodbConfigError: 'MongoDB configuration validity error',
+  JwtConfigError: 'Account JWTConfig validity error',
   PipeImproperUsage: 'This pipe must used only with params!',
 } as const;
 
