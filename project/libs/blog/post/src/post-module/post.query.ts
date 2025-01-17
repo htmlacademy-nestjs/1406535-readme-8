@@ -1,6 +1,6 @@
 import { PostTypes, Query, SortDirection } from '@project/shared-types';
 import { Transform } from 'class-transformer';
-import { IsIn, IsNumber, IsOptional } from 'class-validator';
+import { IsIn, IsNumber, IsOptional, IsString } from 'class-validator';
 import { PostData } from './post.constant';
 
 export class PostQuery implements Query {
@@ -16,6 +16,10 @@ export class PostQuery implements Query {
   @IsIn(Object.values(PostTypes))
   @IsOptional()
   public type: (typeof PostTypes)[keyof typeof PostTypes];
+
+  @IsString()
+  @IsOptional()
+  public tags: string[];
 
   @Transform(({ value }) => +value || PostData.DefaultPage)
   @IsOptional()

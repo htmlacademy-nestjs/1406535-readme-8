@@ -25,6 +25,7 @@ export class PostRdo {
   public type: (typeof PostTypes)[keyof typeof PostTypes];
 
   @Expose()
+  @Transform(({ value }) => value?.map((item) => item.name as string))
   public tags: string[];
 
   @ApiProperty({

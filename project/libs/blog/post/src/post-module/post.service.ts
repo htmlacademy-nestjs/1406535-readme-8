@@ -40,7 +40,17 @@ export class PostService {
 
     try {
       const newPost = await this.blogService.post.create({
-        data: { type: dto.type, userId: dto.userId, content }
+        data: {
+          type: dto.type,
+          userId: dto.userId,
+          content,
+          tags: {
+            connectOrCreate: dto.tags?.map((name) => ({
+              where: { name },
+              create: { name },
+            })),
+          }
+        }
       });
       return newPost;
     } catch {
@@ -80,7 +90,11 @@ export class PostService {
     try {
       const existPost = await this.blogService.post.findUniqueOrThrow({
         where: { id },
-        include: { comments: true, likes: true },
+        include: {
+          comments: true,
+          likes: true,
+          tags: true,
+        },
       });
       return existPost;
     } catch {

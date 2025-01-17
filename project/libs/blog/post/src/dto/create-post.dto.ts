@@ -1,10 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { PostTypes } from '@project/shared-types';
 import { Transform } from 'class-transformer';
-import { ArrayMaxSize, IsArray, IsIn, IsMongoId, IsOptional, IsString, IsUrl, Length, Matches, MaxLength, NotContains, ValidateIf } from 'class-validator';
+import { ArrayMaxSize, IsArray, IsIn, IsMongoId, IsOptional, IsString, IsUrl, Length, Matches, MaxLength, NotContains, Validate, ValidateIf, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 
 const YOUTUBE_REGEXP = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/gi;
 const SPACE_SIGN = ' ';
+const ANY_LETTERS = /^\p{L}+$/u;
+
+@ValidatorConstraint({ name: 'letterStartValidator' })
+export class LetterStartValidator implements ValidatorConstraintInterface {
+  validate(values: string[] = []): boolean {
+    if (values.length) {
+      return values.every((value) => ANY_LETTERS.test(value));
+    }
+    return false;
+  }
+}
 
 export class CreatePostDto {
   @ApiProperty({
@@ -22,7 +33,6 @@ export class CreatePostDto {
   @IsOptional()
   public userId?: string;
 
-  //Должен начинаться с буквы
   @IsArray()
   @IsString({ each: true })
   @Length(3, 10, { each: true })
@@ -30,6 +40,7 @@ export class CreatePostDto {
   @Transform(({ value }) => value.map(item => item.toLowerCase()))
   @Transform(({ value }) => Array.from(new Set(value)))
   @ArrayMaxSize(8)
+  @Validate(LetterStartValidator, { message: 'Tags must begins with letter' })
   @IsOptional()
   public tags: string[];
 
