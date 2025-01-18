@@ -19,10 +19,10 @@ export class UserEntity extends Entity implements StorableEntity<AuthUser> {
       return;
     }
 
-    this.id = user.id ?? '';
+    this.id = user.id ?? undefined;
     this.email = user.email;
     this.fullName = user.fullName;
-    this.avatar = user.avatar;
+    this.avatar = user.avatar ?? undefined;
   }
 
   public toPOJO(): AuthUser {

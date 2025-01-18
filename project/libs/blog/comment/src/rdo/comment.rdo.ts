@@ -32,8 +32,8 @@ export class CommentRdo implements Comment {
   public authorId: string;
 
   @ApiProperty({
-    description: 'Author ID',
-    example: '4e8a6ef4-2e28-46f6-ae5b-1d69b5dc1752'
+    description: 'Published date',
+    example: '2024-12-19T12:23:50'
   })
   @Expose()
   public createdAt: Date;

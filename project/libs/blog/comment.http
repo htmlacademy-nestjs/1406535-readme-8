@@ -3,9 +3,9 @@ POST http://localhost:3000/api/comments/ HTTP/1.1
 Content-Type: application/json
 
 {
-  "postId": "423d625f-1301-4013-8383-9aabfada8e58",
-  "text": "second one",
-  "authorId": "949ff92f-60e1-4525-b822-2be78169c25b"
+  "postId": "8a1acb92-d765-4c5d-a1ef-aaef57c7cc5d",
+  "text": "Second One",
+  "authorId": "676428b948541ea480d114fb"
 }
 
 ###
@@ -16,26 +16,26 @@ GET http://localhost:3000/api/comments/fa298d24-0e96-4dac-ad08-11ac89302060 HTTP
 ###
 
 # Update comment by ID
-PATCH http://localhost:3000/api/comments/9291c0d0-f0df-44f6-8a84-0fe873affdd6 HTTP/1.1
+PATCH http://localhost:3000/api/comments/adebb020-69b5-4c20-8e91-d9d28667134b HTTP/1.1
 Content-Type: application/json
 
 {
-  "postId": "949ff92f-60e1-4525-b822-2be78169c25b",
   "text": "Updated text"
 }
 ###
 
 # Delete comment by ID
-DELETE http://localhost:3000/api/comments/9291c0d0-f0df-44f6-8a84-0fe873adfdd6 HTTP/1.1
+DELETE http://localhost:3000/api/comments/adebb020-69b5-4c20-8e91-d9d28667134b HTTP/1.1
 
 ###
 
 # Get all comments by post ID
-GET http://localhost:3000/api/comments/ HTTP/1.1
-Content-Type: application/json
+# You can specify page, limit ad sort direction as well
+GET http://localhost:3000/api/comments?postId=8a1acb92-d765-4c5d-a1ef-aaef57c7cc5d&limit=3&page=1 HTTP/1.1
 
-{
-  "postId": "b7014f26-43fb-4468-9acc-f09152f58f72"
-}
+###
+
+# Get all comments in database
+GET http://localhost:3000/api/comments/ HTTP/1.1
 
 ###

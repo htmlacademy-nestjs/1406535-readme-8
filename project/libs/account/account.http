@@ -3,7 +3,7 @@ POST http://localhost:3000/api/users/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "user@myspace.com",
+  "email": "nouser@myspace.com",
   "fullName": "John Doe",
   "password": "anonimus1"
 }
@@ -11,7 +11,7 @@ Content-Type: application/json
 ###
 
 # Get user by ID
-GET http://localhost:3000/api/users/7aef6925-4fe5-4057-b5cc-cc7cf214df05 HTTP/1.1
+GET http://localhost:3000/api/users/67713cfffe94dce9f9a16b81 HTTP/1.1
 
 ###
 
@@ -20,7 +20,7 @@ POST http://localhost:3000/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "user@myspace.com",
+  "email": "nouser@myspace.com",
   "password": "anonimus1"
 }
 

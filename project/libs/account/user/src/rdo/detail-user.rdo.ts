@@ -4,7 +4,7 @@ import { Expose, Transform } from 'class-transformer';
 export class DetailUserRdo {
   @ApiProperty({
     description: 'The unique user ID',
-    example: '134ce8babd-cc30-4805-9b12-d9420398e7c5',
+    example: '676428b948541ea480d114fb',
   })
   @Expose()
   public id: string;
@@ -20,7 +20,7 @@ export class DetailUserRdo {
     description: 'User registration date',
     example: '2016-05-18T16:00:00Z'
   })
-  @Expose({ name: 'CreateAt'})
+  @Expose({ name: 'createAt'})
   public registered: Date;
 
   @ApiProperty({

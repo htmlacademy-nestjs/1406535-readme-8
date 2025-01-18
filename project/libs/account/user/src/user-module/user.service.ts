@@ -1,8 +1,8 @@
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
-import { AccountInfo } from '@project/shared-types';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UserEntity } from './user.entity';
 import { UserRepository } from './user.repository';
+import { ApiResponseMessage } from '@project/shared-types';
 
 @Injectable()
 export class UserService {
@@ -16,7 +16,7 @@ export class UserService {
     const existUser = await this.userRepository.findByEmail(email);
 
     if (existUser) {
-      throw new ConflictException(AccountInfo.UserExist);
+      throw new ConflictException(ApiResponseMessage.UserExist);
     }
 
     const user = { email, fullName, avatar, passwordHash: '' };
@@ -30,7 +30,7 @@ export class UserService {
     const existUser = await this.userRepository.findById(id);
 
     if (!existUser) {
-      throw new NotFoundException(AccountInfo.UserNotFound);
+      throw new NotFoundException(ApiResponseMessage.UserNotFound);
     }
 
     return existUser;
