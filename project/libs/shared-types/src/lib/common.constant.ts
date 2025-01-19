@@ -22,6 +22,7 @@ export const ApiResponseMessage = {
   TokenGenerationError: 'Token generation error',
   InvalidID: 'Invalid ID (uuid is expected)',
   BadData: 'Wrong data',
+  FileUploadError: 'File saving fail',
 } as const;
 
 export const Default = {
@@ -39,6 +40,7 @@ export const ValidationInfo = {
   MongodbConfigError: 'MongoDB configuration validity error',
   JwtConfigError: 'Account JWTConfig validity error',
   PipeImproperUsage: 'This pipe must used only with params!',
+  FileStorageConfigError: 'FileStorage configuration validity error',
 } as const;
 
 export const MongodbInfo = {
