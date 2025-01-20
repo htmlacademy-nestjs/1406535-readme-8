@@ -49,7 +49,7 @@ export class CommentService {
     }
 
     if (query?.sortDirection) {
-      orderBy.createdAt = query.sortDirection;
+      orderBy.updatedAt = query.sortDirection;
     }
 
     const [records, count] = await Promise.all([

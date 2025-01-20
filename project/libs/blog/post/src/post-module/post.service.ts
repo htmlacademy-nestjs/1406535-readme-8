@@ -45,11 +45,22 @@ export class PostService {
           userId: dto.userId,
           content,
           tags: {
-            connectOrCreate: dto.tags?.map((name) => ({
-              where: { name },
-              create: { name },
+            connectOrCreate: dto.tags?.map((item) => ({
+              create: { name: item },
+              where: { name: item }
             })),
+          },
+          comments: {
+            connect: [],
+          },
+          likes: {
+            connect: [],
           }
+        },
+        include: {
+          comments: true,
+          likes: true,
+          tags: true,
         }
       });
       return newPost;
@@ -65,7 +76,7 @@ export class PostService {
     const orderBy: Prisma.PostOrderByWithRelationInput = {};
 
     if (query?.sortDirection) {
-      orderBy.createdAt = query.sortDirection;
+      orderBy.updatedAt = query.sortDirection;
     }
 
     if (query?.type) {

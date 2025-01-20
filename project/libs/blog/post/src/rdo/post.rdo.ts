@@ -45,11 +45,11 @@ export class PostRdo {
   public likes: number;
 
   @ApiProperty({
-    description: 'Created date',
+    description: 'Published date',
     example: '2024-12-19T12:23:50'
   })
   @Expose()
-  public createdAt: Date;
+  public updatedAt: Date;
 
   @ApiProperty({
     description: 'Content object (depends on post.type)',
