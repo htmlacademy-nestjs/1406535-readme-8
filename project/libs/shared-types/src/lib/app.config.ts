@@ -1,6 +1,6 @@
 import { registerAs } from '@nestjs/config';
-import { Default, ENVIRONMENTS, ValidationInfo } from '@project/shared-types';
 import Joi from 'joi';
+import { Default, ENVIRONMENTS, ValidationInfo } from './common.constant';
 
 type Environment = typeof ENVIRONMENTS[number];
 

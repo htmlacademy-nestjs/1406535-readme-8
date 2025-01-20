@@ -1,6 +1,6 @@
 import { registerAs } from '@nestjs/config';
-import { Default, ValidationInfo } from '@project/shared-types';
 import Joi from 'joi';
+import { Default, ValidationInfo } from './common.constant';
 
 export interface MongoConfig {
   host: string;
