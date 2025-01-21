@@ -12,4 +12,3 @@ export { Token } from './lib/token.interface';
 export * from './lib/common.constant';
 export { default as applicationConfig } from './lib/app.config';
 export { default as dbConfig } from './lib/mongo.config';
-export { getMongooseOptions } from './lib/get-mongoose-options';
