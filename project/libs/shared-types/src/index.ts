@@ -11,6 +11,7 @@ export { TokenPayload } from './lib/token-payload.interface';
 export { Token } from './lib/token.interface';
 export { File } from './lib/file.interface';
 export { StoredFile } from './lib/stored-file.interface';
+export { Subscriber } from './lib/subscriber.interface';
 export { default as applicationConfig } from './lib/app.config';
 export { default as dbConfig } from './lib/mongo.config';
 export * from './lib/common.constant';
