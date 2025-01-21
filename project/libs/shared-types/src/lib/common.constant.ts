@@ -70,3 +70,7 @@ export const SortType = {
   Favorite: 'like',
   Discussed: 'comment',
 } as const;
+
+export const RabbitRouting = {
+  AddSubscriber: 'notify.addSubscriber',
+} as const;
