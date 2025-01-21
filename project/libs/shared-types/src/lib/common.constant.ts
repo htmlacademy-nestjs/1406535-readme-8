@@ -23,11 +23,13 @@ export const ApiResponseMessage = {
   InvalidID: 'Invalid ID (uuid is expected)',
   BadData: 'Wrong data',
   FileUploadError: 'File saving fail',
+  FileNotFound: 'File not found',
 } as const;
 
 export const Default = {
   GlobalPrefix: 'api',
   SpecificationPrefix: 'spec',
+  ServeRoot: '/static',
   DefaultPort: 3000,
   MongoDefaultPort: 27017,
   PosgresDefaultPort: 5432,
