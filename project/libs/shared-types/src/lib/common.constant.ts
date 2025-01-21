@@ -34,6 +34,7 @@ export const Default = {
   MongoDefaultPort: 27017,
   PosgresDefaultPort: 5432,
   RabbitDefaultPort: 5672,
+  SmtpDefaultPort: 25,
 } as const;
 
 export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
@@ -45,6 +46,7 @@ export const ValidationInfo = {
   PipeImproperUsage: 'This pipe must used only with params!',
   FileStorageConfigError: 'FileStorage configuration validity error',
   NofityServiceConfigError: 'Notify configuration validity error',
+  RabbitConfigError: 'RabbitMQ configuration validity error',
 } as const;
 
 export const MongodbInfo = {

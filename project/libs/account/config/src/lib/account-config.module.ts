@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import defaultJwtConfig from './lib/jwt.config';
-import { dbConfig as defaultMongodbConfig } from '@project/shared-types';
-import { applicationConfig as defaultApplicationConfig } from '@project/shared-types';
+import jwtConfig from './jwt.config';
+import rabbitConfig from './rabbit.config';
+import { mongodbConfig } from '@project/shared-types';
+import { applicationConfig } from '@project/shared-types';
 
 const FILE_PATH = 'apps/account/account.env';
 
@@ -11,7 +12,7 @@ const FILE_PATH = 'apps/account/account.env';
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      load: [defaultApplicationConfig, defaultMongodbConfig, defaultJwtConfig],
+      load: [applicationConfig, mongodbConfig, jwtConfig, rabbitConfig],
       envFilePath: FILE_PATH,
     }),
   ]
