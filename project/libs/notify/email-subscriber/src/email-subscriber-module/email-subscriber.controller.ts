@@ -13,9 +13,9 @@ export class EmailSubscriberController {
   ) {}
 
   @RabbitSubscribe({
-    exchange: 'notify.income',
+    exchange: 'notify',
     routingKey: RabbitRouting.AddSubscriber,
-    queue: 'notify.income',
+    queue: 'notify',
   })
   public async create(subscriber: CreateSubscriberDto) {
     this.subscriberService.addSubscriber(subscriber);
