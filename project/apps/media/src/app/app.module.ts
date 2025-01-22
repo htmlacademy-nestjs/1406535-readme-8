@@ -6,12 +6,13 @@ import { getMongooseOptions } from '@project/shared-helpers';
 
 @Module({
   imports: [
-    FileUploaderModule,
-    MediaConfigModule,
     MongooseModule.forRootAsync(
       getMongooseOptions('application.db')
-    )],
-  controllers: [],
+    ),
+    FileUploaderModule,
+    MediaConfigModule,
+  ],
+    controllers: [],
   providers: [],
 })
 export class AppModule {}

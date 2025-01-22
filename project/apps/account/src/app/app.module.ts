@@ -7,12 +7,12 @@ import { getMongooseOptions } from '@project/shared-helpers';
 import { UserModule } from '@project/user';
 @Module({
   imports: [
-    UserModule,
-    AuthenticationModule,
-    AccountConfigModule,
     MongooseModule.forRootAsync(
       getMongooseOptions('db')
     ),
+    UserModule,
+    AuthenticationModule,
+    AccountConfigModule,
     NotifyModule,
   ],
   controllers: [],

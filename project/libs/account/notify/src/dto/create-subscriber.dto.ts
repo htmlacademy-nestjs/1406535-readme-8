@@ -6,5 +6,5 @@ export class CreateSubscriberDto {
 
   @IsString()
   @IsNotEmpty()
-  public name: string;
+  public fullName: string;
 }

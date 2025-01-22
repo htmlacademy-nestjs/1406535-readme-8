@@ -3,13 +3,10 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UserEntity } from './user.entity';
 import { UserRepository } from './user.repository';
 import { ApiResponseMessage } from '@project/shared-types';
-import { NotifyService } from '@project/account-notify';
-
 @Injectable()
 export class UserService {
   constructor(
-    private readonly userRepository: UserRepository,
-    private readonly notifyService: NotifyService,
+    private readonly userRepository: UserRepository
   ) {}
 
   public async register(dto: CreateUserDto): Promise<UserEntity | null> {
@@ -24,8 +21,6 @@ export class UserService {
     const user = { email, fullName, avatar, passwordHash: '' };
     const userEntity = await new UserEntity(user).setPassword(password);
     this.userRepository.save(userEntity);
-
-    await this.notifyService.registerSubscriber({ email, name: fullName });
 
     return userEntity;
   }

@@ -2,7 +2,7 @@ import { Entity, StorableEntity, Subscriber } from '@project/shared-types';
 
 export class EmailSubscriberEntity extends Entity implements StorableEntity<Subscriber> {
   public email: string;
-  public name: string;
+  public fullName: string;
 
   constructor (subscriber?: Subscriber) {
     super();
@@ -17,14 +17,14 @@ export class EmailSubscriberEntity extends Entity implements StorableEntity<Subs
 
     this.id = subscriber.id ?? undefined;
     this.email = subscriber.email;
-    this.name = subscriber.name;
+    this.fullName = subscriber.fullName;
   }
 
   public toPOJO(): Subscriber {
     return {
       id: this.id,
       email: this.email,
-      name: this.name,
+      fullName: this.fullName,
     }
   }
 }

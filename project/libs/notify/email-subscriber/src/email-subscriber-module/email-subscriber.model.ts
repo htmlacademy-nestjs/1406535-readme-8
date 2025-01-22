@@ -13,7 +13,7 @@ export class EmailSubscriberModel extends Document implements Subscriber {
   public email: string;
 
   @Prop({ required: true })
-  public name: string;
+  public fullName: string;
 
   public id?: string;
 }

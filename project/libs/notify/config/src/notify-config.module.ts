@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import notifyConfig from './notify.config';
+import { mongodbConfig } from '@project/shared-types';
+import { applicationConfig } from '@project/shared-types';
 
 const FILE_PATH = 'apps/notify/notify.env';
 
@@ -9,7 +11,7 @@ const FILE_PATH = 'apps/notify/notify.env';
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      load: [notifyConfig],
+      load: [applicationConfig, mongodbConfig, notifyConfig],
       envFilePath: FILE_PATH
     }),
   ]

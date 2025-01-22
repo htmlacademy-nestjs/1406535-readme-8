@@ -18,7 +18,7 @@ export class MailService {
       subject: 'The subscription has been issued',
       template: './add-subscriber',
       context: {
-        user: `${subscriber.name}`,
+        user: `${subscriber.fullName}`,
         email: `${subscriber.email}`,
       }
     })
