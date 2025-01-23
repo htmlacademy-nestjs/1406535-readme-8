@@ -1,9 +1,9 @@
-import { Query, SortDirection } from '@project/shared-types';
-import { CommentData } from './comment.constant';
 import { Transform } from 'class-transformer';
-import { IsIn, IsNumber, IsOptional, IsUUID } from 'class-validator';
+import { IsNumber, IsOptional, IsUUID } from 'class-validator';
+import { PaginationQuery } from '@project/shared-types';
+import { CommentData } from './comment.constant';
 
-export class CommentQuery implements Query {
+export class CommentQuery extends PaginationQuery {
   @IsUUID()
   @IsOptional()
   public postId: string;
@@ -12,12 +12,4 @@ export class CommentQuery implements Query {
   @IsNumber()
   @IsOptional()
   public limit: number = CommentData.CountLimit;
-
-  @IsIn(Object.values(SortDirection))
-  @IsOptional()
-  public sortDirection: (typeof SortDirection)[keyof typeof SortDirection] = CommentData.DefaultSort;
-
-  @Transform(({ value }) => +value || CommentData.DefaultPage)
-  @IsOptional()
-  public page: number = CommentData.DefaultPage;
 }

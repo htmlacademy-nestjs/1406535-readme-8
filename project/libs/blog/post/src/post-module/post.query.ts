@@ -1,27 +1,34 @@
-import { PostTypes, Query, SortDirection } from '@project/shared-types';
+import { PaginationQuery, PostTypes, Status } from '@project/shared-types';
 import { Transform } from 'class-transformer';
-import { IsIn, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsIn, IsMongoId, IsNumber, IsOptional, IsString } from 'class-validator';
 import { PostData } from './post.constant';
 
-export class PostQuery implements Query {
+export class PostQuery extends PaginationQuery {
   @Transform(({ value }) => +value || PostData.CountLimit)
   @IsNumber()
   @IsOptional()
   public limit: number = PostData.CountLimit;
 
-  @IsIn(Object.values(SortDirection))
-  @IsOptional()
-  public sortDirection: (typeof SortDirection)[keyof typeof SortDirection] = PostData.DefaultSort;
-
+  @Transform(({ value }) => value.toUpperCase())
   @IsIn(Object.values(PostTypes))
   @IsOptional()
   public type: (typeof PostTypes)[keyof typeof PostTypes];
 
+  @Transform(({ value }) => value.toLowerCase())
   @IsString()
   @IsOptional()
-  public tags: string[];
+  public tag: string;
 
-  @Transform(({ value }) => +value || PostData.DefaultPage)
+  @IsString()
   @IsOptional()
-  public page: number = PostData.DefaultPage;
+  public search: string;
+
+  @IsMongoId()
+  @IsOptional()
+  public author: string;
+
+  @IsIn(Object.values(Status))
+  @Transform(({ value }) => value.toLowerCase())
+  @IsOptional()
+  public status: (typeof Status)[keyof typeof Status] = Status.Published;
 }

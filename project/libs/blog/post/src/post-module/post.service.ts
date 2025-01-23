@@ -1,11 +1,16 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { PrismaClientService } from '@project/blog-models';
-import { ApiResponseMessage, PaginationResult, Post, PostTypes } from '@project/shared-types';
+import { ApiResponseMessage, PaginationResult, Post, PostTypes, Status } from '@project/shared-types';
 import { Prisma } from '@prisma/client';
 import { PostQuery } from './post.query';
 import { CreatePostDto } from '../dto/create-post.dto';
 import { UpdatePostDto } from '../dto/update-post.dto';
 
+const REFINEMENTS = {
+  comments: true,
+  likes: true,
+  tags: true,
+};
 @Injectable()
 export class PostService {
   constructor(private blogService: PrismaClientService) {}
@@ -45,12 +50,19 @@ export class PostService {
           userId: dto.userId,
           content,
           tags: {
-            connectOrCreate: dto.tags?.map((name) => ({
-              where: { name },
-              create: { name },
+            connectOrCreate: dto.tags?.map((item) => ({
+              create: { name: item },
+              where: { name: item }
             })),
+          },
+          comments: {
+            connect: [],
+          },
+          likes: {
+            connect: [],
           }
-        }
+        },
+        include: REFINEMENTS,
       });
       return newPost;
     } catch {
@@ -64,8 +76,22 @@ export class PostService {
     const where: Prisma.PostWhereInput = {};
     const orderBy: Prisma.PostOrderByWithRelationInput = {};
 
+    if (query?.status) {
+      switch (query.status) {
+        case Status.Draft:
+          where.published = false;
+          break;
+        case Status.All:
+          where.published = undefined;
+          break;
+        case Status.Published:
+        default:
+          where.published = true;
+      }
+    }
+
     if (query?.sortDirection) {
-      orderBy.createdAt = query.sortDirection;
+      orderBy.updatedAt = query.sortDirection;
     }
 
     if (query?.type) {
@@ -73,7 +99,7 @@ export class PostService {
     }
 
     const [records, count] = await Promise.all([
-      this.blogService.post.findMany({ where, orderBy, skip, take }),
+      this.blogService.post.findMany({ where, orderBy, skip, take, include: REFINEMENTS }),
       this.сountAll(where),
     ]);
 
@@ -90,11 +116,7 @@ export class PostService {
     try {
       const existPost = await this.blogService.post.findUniqueOrThrow({
         where: { id },
-        include: {
-          comments: true,
-          likes: true,
-          tags: true,
-        },
+        include: REFINEMENTS,
       });
       return existPost;
     } catch {
@@ -109,7 +131,7 @@ export class PostService {
     try {
       const updatedPost = await this.blogService.post.update({
         where: { id },
-        data: { type: dto.type, userId: dto.userId, content },
+        data: { type: dto.type, userId: dto.userId, content, published: dto.published },
       });
       return updatedPost;
     } catch {

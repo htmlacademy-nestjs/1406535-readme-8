@@ -36,5 +36,5 @@ export class CommentRdo implements Comment {
     example: '2024-12-19T12:23:50'
   })
   @Expose()
-  public createdAt: Date;
+  public updatedAt: Date;
 }

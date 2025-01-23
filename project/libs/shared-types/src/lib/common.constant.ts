@@ -22,14 +22,26 @@ export const ApiResponseMessage = {
   TokenGenerationError: 'Token generation error',
   InvalidID: 'Invalid ID (uuid is expected)',
   BadData: 'Wrong data',
+  FileUploadError: 'File saving fail',
+  FileNotFound: 'File not found',
+} as const;
+
+export const SortDirection = {
+  Asc: 'asc',
+  Desc: 'desc',
 } as const;
 
 export const Default = {
   GlobalPrefix: 'api',
   SpecificationPrefix: 'spec',
+  ServeRoot: '/static',
   DefaultPort: 3000,
   MongoDefaultPort: 27017,
   PosgresDefaultPort: 5432,
+  RabbitDefaultPort: 5672,
+  SmtpDefaultPort: 25,
+  SortDirection: SortDirection.Desc,
+  PageNumber: 1,
 } as const;
 
 export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
@@ -39,6 +51,9 @@ export const ValidationInfo = {
   MongodbConfigError: 'MongoDB configuration validity error',
   JwtConfigError: 'Account JWTConfig validity error',
   PipeImproperUsage: 'This pipe must used only with params!',
+  FileStorageConfigError: 'FileStorage configuration validity error',
+  NofityServiceConfigError: 'Notify configuration validity error',
+  RabbitConfigError: 'RabbitMQ configuration validity error',
 } as const;
 
 export const MongodbInfo = {
@@ -54,13 +69,18 @@ export const PostTypes = {
   Link: 'LINK',
 } as const;
 
-export const SortDirection = {
-  Asc: 'asc',
-  Desc: 'desc',
-} as const;
-
 export const SortType = {
   Date: 'time',
   Favorite: 'like',
   Discussed: 'comment',
 } as const;
+
+export const RabbitRouting = {
+  AddSubscriber: 'notify.addSubscriber',
+} as const;
+
+export const Status = {
+  All: 'all',
+  Draft: 'draft',
+  Published: 'published',
+}

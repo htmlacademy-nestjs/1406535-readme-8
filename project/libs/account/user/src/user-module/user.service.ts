@@ -3,7 +3,6 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UserEntity } from './user.entity';
 import { UserRepository } from './user.repository';
 import { ApiResponseMessage } from '@project/shared-types';
-
 @Injectable()
 export class UserService {
   constructor(

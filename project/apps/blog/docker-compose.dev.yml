@@ -1,7 +1,8 @@
 services:
-  postgres:
+
+  posts.postgres:
     image: postgres:14-alpine
-    container_name: postgres
+    container_name: posts.postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -21,9 +22,9 @@ services:
     networks:
       - blog
 
-  pgadmin:
+  posts.pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin
+    container_name: posts.pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
@@ -31,7 +32,7 @@ services:
     ports:
       - ${PGADMIN_PORT}:80
     depends_on:
-      - postgres
+      - posts.postgres
     networks:
       - blog
 

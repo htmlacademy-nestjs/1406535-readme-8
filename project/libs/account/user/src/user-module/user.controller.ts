@@ -6,11 +6,13 @@ import { UserService } from './user.service';
 import { DetailUserRdo } from '../rdo/detail-user.rdo';
 import { MongoIdValidationPipe } from '@project/shared-pipes';
 import { ApiResponseMessage } from '@project/shared-types';
+import { NotifyService } from '@project/account-notify';
 
 @Controller('users')
 export class UserController {
   constructor(
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly notifyService: NotifyService,
   ) {}
 
   @ApiCreatedResponse({ type: UserRdo, description: ApiResponseMessage.UserCreated })
@@ -19,6 +21,7 @@ export class UserController {
   @Post('register')
   public async create(@Body() dto: CreateUserDto) {
     const newUser = await this.userService.register(dto);
+    await this.notifyService.registerSubscriber({ email: dto.email, fullName: dto.fullName });
     return newUser.toPOJO();
   }
 
