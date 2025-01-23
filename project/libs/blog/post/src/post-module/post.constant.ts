@@ -1,8 +1,7 @@
-import { SortDirection, SortType } from '@project/shared-types';
+import { SortType, Status } from '@project/shared-types';
 
 export const PostData = {
   CountLimit: 25,
-  DefaultSort: SortDirection.Desc,
   SortType: SortType.Date,
-  DefaultPage: 1,
+  Status: Status.Published,
 } as const;

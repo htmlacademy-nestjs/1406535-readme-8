@@ -26,6 +26,11 @@ export const ApiResponseMessage = {
   FileNotFound: 'File not found',
 } as const;
 
+export const SortDirection = {
+  Asc: 'asc',
+  Desc: 'desc',
+} as const;
+
 export const Default = {
   GlobalPrefix: 'api',
   SpecificationPrefix: 'spec',
@@ -35,6 +40,8 @@ export const Default = {
   PosgresDefaultPort: 5432,
   RabbitDefaultPort: 5672,
   SmtpDefaultPort: 25,
+  SortDirection: SortDirection.Desc,
+  PageNumber: 1,
 } as const;
 
 export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
@@ -62,11 +69,6 @@ export const PostTypes = {
   Link: 'LINK',
 } as const;
 
-export const SortDirection = {
-  Asc: 'asc',
-  Desc: 'desc',
-} as const;
-
 export const SortType = {
   Date: 'time',
   Favorite: 'like',
@@ -76,3 +78,9 @@ export const SortType = {
 export const RabbitRouting = {
   AddSubscriber: 'notify.addSubscriber',
 } as const;
+
+export const Status = {
+  All: 'all',
+  Draft: 'draft',
+  Published: 'published',
+}

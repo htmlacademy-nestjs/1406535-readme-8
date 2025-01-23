@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { PostTypes } from '@project/shared-types';
 import { Transform } from 'class-transformer';
-import { ArrayMaxSize, IsArray, IsIn, IsMongoId, IsOptional, IsString, IsUrl, Length, Matches, MaxLength, NotContains, Validate, ValidateIf, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import { ArrayMaxSize, IsArray, IsBoolean, IsIn, IsMongoId, IsOptional, IsString, IsUrl, Length, Matches, MaxLength, NotContains, Validate, ValidateIf, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 
 const YOUTUBE_REGEXP = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/gi;
 const SPACE_SIGN = ' ';
@@ -100,4 +100,8 @@ export class CreatePostDto {
   @ValidateIf(obj => obj.type === PostTypes.Photo)
   @IsUrl()
   public photoUrl: string;
+
+  @Transform(({ value } ) => value === 'true')
+  @IsOptional()
+  public published: boolean;
 }

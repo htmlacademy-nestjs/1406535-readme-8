@@ -12,30 +12,46 @@ Content-Type: application/json
 
 ###
 
-# Get posts with some limits
-GET http://localhost:3020/api/posts?type=QUOTA HTTP/1.1
-
-###
-
 # Get all posts
+# You will get latest 25 (or less) published post in page by default
 GET http://localhost:3020/api/posts HTTP/1.1
 
 ###
 
+# Get posts with some limits. You can specify one or combine some limits as you wish
+# Examples below
+
+# You can specify page, limit ad sort direction as well:
+# limit = [number] page = [number] sortDirection = asc | desc
+GET http://localhost:3020/api/posts?limit=3&page=1&sortDirection=asc HTTP/1.1
+
+###
+
+# To sort by post type:
+# type = text | video | qouta | photo | link (in any register)
+GET http://localhost:3020/api/posts?type=video HTTP/1.1
+
+###
+
+# Get post with special status:
+# status = all | draft | published (in any register)
+GET http://localhost:3020/api/posts?status=all HTTP/1.1
+
+###
+
 # Get post by ID
-GET http://localhost:3020/api/posts/0ba290e4-5f5e-4114-bec5-5bfff19d943a HTTP/1.1
+GET http://localhost:3020/api/posts/02c504b9-c8ec-45cb-a887-21885c1b9ab2 HTTP/1.1
 
 ###
 
 # Update post by ID
-PATCH http://localhost:3020/api/posts/4200e058-a88e-4c54-b622-bd47d9bb2d5c HTTP/1.1
+PATCH http://localhost:3020/api/posts/9994331e-12a9-4c78-843a-608bd62f6464 HTTP/1.1
 Content-Type: application/json
 
 {
-  "userId": "676428b948541ea480d114fb",
   "type": "QUOTA",
-  "quotaAuthor": "London",
-  "quotaText": "Not good idea sdfjjkfdjk sdfkljklsdfj"
+  "quotaText": "Not good idea sdfjjkfdjk sdfkljklsdfj",
+  "published": "false"
 }
 
 ###
