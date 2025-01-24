@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "account:start": "npx nx run account:serve",
     "account:docker-up": "docker compose --file ./apps/account/docker-compose.dev.yml --project-name readme-account --env-file ./apps/account/account.env up -d",
     "account:docker-down": "docker compose --file ./apps/account/docker-compose.dev.yml --project-name readme-account --env-file ./apps/account/account.env down -v",
     "blog:docker-up": "docker compose --file ./apps/blog/docker-compose.dev.yml --project-name readme-blog --env-file ./apps/blog/blog.env up -d",
@@ -11,7 +10,10 @@
     "media:docker-up": "docker compose --file ./apps/media/docker-compose.dev.yml --project-name readme-media --env-file ./apps/media/media.env up -d",
     "media:docker-down": "docker compose --file ./apps/media/docker-compose.dev.yml --project-name readme-media --env-file ./apps/media/media.env down -v",
     "notify:docker-up": "docker compose --file ./apps/notify/docker-compose.dev.yml --project-name readme-notify --env-file ./apps/notify/notify.env up -d",
-    "notify:docker-down": "docker compose --file ./apps/notify/docker-compose.dev.yml --project-name readme-notify --env-file ./apps/notify/notify.env down -v"
+    "notify:docker-down": "docker compose --file ./apps/notify/docker-compose.dev.yml --project-name readme-notify --env-file ./apps/notify/notify.env down -v",
+    "db:start": "npm run account:docker-up && npm run blog:docker-up && npm run media:docker-up && npm run notify:docker-up && npx nx run blog:db-migrate && npx nx run blog:db-generate",
+    "db:stop": "npm run account:docker-down && npm run blog:docker-down && npm run media:docker-down && npm run notify:docker-down",
+    "app:start": "npx nx run-many --target=serve --all --maxParallel=100"
   },
   "private": true,
   "dependencies": {
