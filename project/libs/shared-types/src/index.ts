@@ -9,6 +9,8 @@ export { PaginationResult } from './lib/pagination-result.interface';
 export { Query } from './lib/query.interface';
 export { TokenPayload } from './lib/token-payload.interface';
 export { Token } from './lib/token.interface';
+export { JwtToken } from './lib/jwt-token.interface';
+export { RefreshTokenPayload } from './lib/refresh-token-payload.interface';
 export { File } from './lib/file.interface';
 export { StoredFile } from './lib/stored-file.interface';
 export { Subscriber } from './lib/subscriber.interface';

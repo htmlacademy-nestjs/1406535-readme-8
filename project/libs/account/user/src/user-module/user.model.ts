@@ -4,14 +4,9 @@ import { AuthUser } from '@project/shared-types';
 
 @Schema({
   collection: 'users',
-  timestamps: true,
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
+  timestamps: true
 })
 export class UserModel extends Document implements AuthUser {
-  @Prop()
-  public avatar: string;
-
   @Prop({ required: true, unique: true })
   public email: string;
 
@@ -22,16 +17,16 @@ export class UserModel extends Document implements AuthUser {
   public passwordHash: string;
 
   @Prop()
+  public avatar: string;
+
+  @Prop()
   public posts: string[];
 
   @Prop()
   public subscribers: string[];
 
+  @Prop()
   public id?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(UserModel);
-
-UserSchema.virtual('id').get(function() {
-  return this._id.toString();
-});
