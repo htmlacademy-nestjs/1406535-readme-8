@@ -11,6 +11,7 @@ import { MongoIdValidationPipe } from '@project/shared-pipes';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { NotifyService } from '@project/account-notify';
 import { JwtRefreshGuard } from '../guards/jwt-refresh.guard';
+import { RequestWithTokenPayload } from './request-with-token-payload.interface';
 @Controller('auth')
 export class AuthenticationController {
   constructor(
@@ -64,5 +65,11 @@ export class AuthenticationController {
   // })
   public async refreshToken(@Req() { user }: RequestWithUser) {
     return this.authService.createUserToken(user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('check')
+  public async checkToken(@Req() { user: payload }: RequestWithTokenPayload) {
+    return payload;
   }
 }

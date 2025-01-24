@@ -31,6 +31,7 @@
       "@project/media-config": ["libs/media/config/src/index.ts"],
       "@project/notify-config": ["libs/notify/config/src/index.ts"],
       "@project/shared-helpers": ["libs/shared-helpers/src/index.ts"],
+      "@project/shared-interceptors": ["libs/shared-interceptors/src/index.ts"],
       "@project/shared-pipes": ["libs/shared-pipes/src/index.ts"],
       "@project/shared-types": ["libs/shared-types/src/index.ts"],
       "@project/user": ["libs/account/user/src/index.ts"]
