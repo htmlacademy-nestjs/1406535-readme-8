@@ -1,3 +1,12 @@
+import { Inject, Injectable } from '@nestjs/common';
+import { jwtConfig } from '@project/account-config';
+import { RefreshTokenRepository } from './refresh-token.repository';
+import { ConfigType } from '@nestjs/config';
+import { RefreshTokenPayload } from '@project/shared-types';
+import { parseTime } from '@project/shared-helpers';
+import { RefreshTokenEntity } from './refresh-token.entity';
+import dayjs from 'dayjs';
+
 @Injectable()
 export class RefreshTokenService {
   constructor(
@@ -19,7 +28,7 @@ export class RefreshTokenService {
 
   public async deleteRefreshSession(tokenId: string): Promise<void> {
     await this.deleteExpiredRefreshTokens();
-    await this.refreshTokenRepository.deleteByTokenId(tokenId)
+    await this.refreshTokenRepository.deleteByTokenId(tokenId);
   }
 
   public async isExists(tokenId: string): Promise<boolean> {

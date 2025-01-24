@@ -24,6 +24,7 @@ export const ApiResponseMessage = {
   BadData: 'Wrong data',
   FileUploadError: 'File saving fail',
   FileNotFound: 'File not found',
+  TokenNotFound: 'Token does not exists',
 } as const;
 
 export const SortDirection = {
