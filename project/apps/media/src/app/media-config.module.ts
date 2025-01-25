@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppConfig, MediaConfig } from '@project/shared-configurations';
+import { AppConfig, MediaConfig, MongoConfig } from '@project/shared-configurations';
 
 const APP_ENV = 'apps/media/media.env';
 
@@ -9,7 +9,7 @@ const APP_ENV = 'apps/media/media.env';
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      load: [AppConfig, MediaConfig],
+      load: [AppConfig, MediaConfig, MongoConfig],
       envFilePath: APP_ENV,
     }),
   ]

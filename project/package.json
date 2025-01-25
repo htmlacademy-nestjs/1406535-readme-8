@@ -13,7 +13,7 @@
     "notify:docker-down": "docker compose --file ./apps/notify/docker-compose.dev.yml --project-name readme-notify --env-file ./apps/notify/notify.env --env-file ./apps/notify/rabbit.env down -v",
     "db:start": "npm run account:docker-up && npm run blog:docker-up && npm run media:docker-up && npm run notify:docker-up && npx nx run blog:db-migrate && npx nx run blog:db-generate",
     "db:stop": "npm run account:docker-down && npm run blog:docker-down && npm run media:docker-down && npm run notify:docker-down",
-    "app:start": "npx nx run-many --target=serve --all --maxParallel=100"
+    "app:start": "npx nx run-many --target=serve --all --maxParallel=10"
   },
   "private": true,
   "dependencies": {

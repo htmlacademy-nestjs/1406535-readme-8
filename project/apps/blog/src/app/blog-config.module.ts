@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppConfig, RabbitConfig } from '@project/shared-configurations';
 
 const APP_ENV = 'apps/blog/blog.env';
-const RABBIT_ENV = 'libs/notify/rabbit.env';
+const RABBIT_ENV = 'apps/notify/rabbit.env';
 
 @Module({
   imports: [
