@@ -43,6 +43,9 @@ export const Default = {
   SmtpDefaultPort: 25,
   SortDirection: SortDirection.Desc,
   PageNumber: 1,
+  MaxRedirects: 5,
+  Timeout: 3000,
+
 } as const;
 
 export const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
@@ -55,6 +58,7 @@ export const ValidationInfo = {
   FileStorageConfigError: 'FileStorage configuration validity error',
   NofityServiceConfigError: 'Notify configuration validity error',
   RabbitConfigError: 'RabbitMQ configuration validity error',
+  GatewayConfigError: 'Gateway configuration validity error',
 } as const;
 
 export const MongodbInfo = {
@@ -85,3 +89,9 @@ export const Status = {
   Draft: 'draft',
   Published: 'published',
 }
+
+export const ApplicationServiceURL = {
+  Users: 'http://localhost:3010/api/auth',
+  Posts: 'http://localhost:3020/api/posts',
+  Comments: 'http://localhost:3020/api/comments',
+} as const;

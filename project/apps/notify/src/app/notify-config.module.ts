@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppConfig, MailConfig, MongoConfig } from '@project/shared-configurations';
 
 const APP_ENV = 'apps/notify/notify.env';
-const NOTIFY_ENV = 'apps/notify/rabbit.env';
+const RABBIT_ENV = 'apps/notify/rabbit.env';
 
 @Module({
   imports: [
@@ -11,7 +11,7 @@ const NOTIFY_ENV = 'apps/notify/rabbit.env';
       isGlobal: true,
       cache: true,
       load: [AppConfig, MongoConfig, MailConfig],
-      envFilePath: [APP_ENV, NOTIFY_ENV]
+      envFilePath: [APP_ENV, RABBIT_ENV]
     }),
   ]
 })

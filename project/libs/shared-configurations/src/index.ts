@@ -4,3 +4,4 @@ export { default as MailConfig } from './lib/mail.config';
 export { default as MongoConfig } from './lib/mongo.config';
 export { default as RabbitConfig } from './lib/rabbit.config';
 export { default as MediaConfig } from './lib/rabbit.config';
+export { default as GatewayConfig } from './lib/gateway.config';
