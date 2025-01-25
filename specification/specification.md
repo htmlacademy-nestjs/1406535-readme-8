@@ -11,15 +11,16 @@
 1. `cd ./project`
 2. `npm install`
 
-- Создать файлы `.env` на основе `.env-example` в папках `apps/account, apps/blog, apps/media, apps/notify, libs/blog/models/prisma`
+- Создать файлы `.env` на основе `.env-example` в папках `apps/account, apps/api, apps/blog, apps/media, apps/notify, libs/blog/models/prisma`
 
 ```
 cp apps/account/account.env-example apps/account/account.env
+cp apps/api/api.env-example apps/api/api.env
 cp apps/blog/blog.env-example apps/blog/blog.env
-cp libs/blog/models/prisma/.env-example libs/blog/models/prisma/.env
 cp apps/media/media.env-example apps/media/media.env
 cp apps/notify/notify.env-example apps/notify/notify.env
 cp apps/notify/rabbit.env-example apps/notify/rabbit.env
+cp libs/blog/models/prisma/.env-example libs/blog/models/prisma/.env
 ```
 
 - Запустить docker.desktop
@@ -31,16 +32,19 @@ cp apps/notify/rabbit.env-example apps/notify/rabbit.env
 
 ### Общие переменные
 
+- ENVIRONMENTS - окружение ('development', 'production', 'stage')
 - PORT - номер порта, на котором будет запущено приложение
 - UPLOAD_DIRECTORY - путь для хранения загруженных файлов
-- SERVE_ROOT - путь доступа к файлам
+- SERVE_ROOT - поддиректория для сохранения файлов
+- HTTP_CLIENT_MAX_REDIRECTS - максимальное количество перенаправлений
+- HTTP_CLIENT_TIMEOUT - таймаут
 
 ### Данные, необходимые для работы с БД и UI PosgreSQL
 
 - POSTGRES_DB - имя БД
+- POSTGRES_PORT - порт БД
 - POSTGRES_USER - имя пользователя БД
 - POSTGRES_PASSWORD - пароль БД
-- POSTGRES_PORT - порт БД
 - PGADMIN_DEFAULT_EMAIL - имя пользователя PGADMIN
 - PGADMIN_DEFAULT_PASSWORD - пароль PGADMIN
 - PGADMIN_PORT - порт PGADMIN
@@ -58,9 +62,9 @@ cp apps/notify/rabbit.env-example apps/notify/rabbit.env
 ### Данные, необходимые для работы с RabbitMQ
 
 - RABBIT_HOST - хост Rabbit
+- RABBIT_PORT - порт Rabbit
 - RABBIT_USER - имя пользователя Rabbit
 - RABBIT_PASSWORD - пароль Rabbit
-- RABBIT_PORT - порт Rabbit
 - RABBIT_QUEUE - очередь Rabbit
 - RABBIT_EXCHANGE - exchange Rabbit
 - RABBITMQ_DEFAULT_USER - имя пользователя по умолчанию Rabbit
