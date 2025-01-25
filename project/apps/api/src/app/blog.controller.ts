@@ -3,8 +3,8 @@ import { AxiosExceptionFilter } from './filters/axios-exception.filter';
 import { HttpService } from '@nestjs/axios';
 import { CheckAuthGuard } from './guards/check-auth.guard';
 import { RequestIdInterceptor } from '@project/shared-interceptors';
-import { ApplicationServiceURL } from './app.config';
 import { CreatePostDto } from '@project/blog-post';
+import { ApplicationServiceURL } from '@project/shared-types';
 
 @Controller('blog')
 @UseFilters(AxiosExceptionFilter)

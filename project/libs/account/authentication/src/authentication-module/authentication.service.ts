@@ -1,13 +1,13 @@
 import { ConflictException, Inject, Injectable, InternalServerErrorException, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UserEntity, UserRepository } from '@project/user';
-import { ApiResponseMessage, Token, TokenPayload, User } from '@project/shared-types';
+import { ApiResponseMessage, Token, User } from '@project/shared-types';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigType } from '@nestjs/config';
-import { jwtConfig } from '@project/account-config';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from '../dto/login-user.dto';
 import { RefreshTokenService } from '../refresh-token-module/refresh-token.service';
 import { createJWTPayload } from '@project/shared-helpers';
+import { JwtConfig } from '@project/shared-configurations';
 
 @Injectable()
 export class AuthenticationService {
@@ -16,7 +16,7 @@ export class AuthenticationService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
-    @Inject(jwtConfig.KEY) private readonly jwtOptions: ConfigType<typeof jwtConfig>,
+    @Inject(JwtConfig.KEY) private readonly jwtOptions: ConfigType<typeof JwtConfig>,
     private readonly refreshTokenService: RefreshTokenService,
   ) {}
 

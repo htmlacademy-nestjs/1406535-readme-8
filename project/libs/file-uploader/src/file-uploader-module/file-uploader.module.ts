@@ -12,9 +12,10 @@ import { FileUploaderFactory } from './file-uploader.factory';
     ServeStaticModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        const rootPath = configService.get<string>('media.uploadDirectory');
-        const serveRoot = configService.get<string>('media.serveRoot');
-        return [{ rootPath, serveRoot }]
+        return [{
+          rootPath: configService.get<string>('media.uploadDirectory'),
+          serveRoot: configService.get<string>('media.serveRoot')
+        }]
       }
     }),
     MongooseModule.forFeature([

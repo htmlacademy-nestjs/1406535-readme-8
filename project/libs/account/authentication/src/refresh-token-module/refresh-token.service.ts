@@ -1,17 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { jwtConfig } from '@project/account-config';
 import { RefreshTokenRepository } from './refresh-token.repository';
 import { ConfigType } from '@nestjs/config';
 import { RefreshTokenPayload } from '@project/shared-types';
 import { parseTime } from '@project/shared-helpers';
 import { RefreshTokenEntity } from './refresh-token.entity';
 import dayjs from 'dayjs';
+import { JwtConfig } from '@project/shared-configurations';
 
 @Injectable()
 export class RefreshTokenService {
   constructor(
     private readonly refreshTokenRepository: RefreshTokenRepository,
-    @Inject (jwtConfig.KEY) private readonly jwtOptions: ConfigType<typeof jwtConfig>,
+    @Inject (JwtConfig.KEY) private readonly jwtOptions: ConfigType<typeof JwtConfig>,
   ) {}
 
   public async createRefreshSession(payload: RefreshTokenPayload) {

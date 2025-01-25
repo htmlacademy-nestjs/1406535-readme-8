@@ -8,9 +8,7 @@ import { NotifyModule } from '@project/notification';
 @Module({
   imports: [
     AccountConfigModule,
-    MongooseModule.forRootAsync(
-      getMongooseOptions('application.db')
-    ),
+    MongooseModule.forRootAsync(getMongooseOptions('db')),
     UserModule,
     AuthenticationModule,
     NotifyModule,

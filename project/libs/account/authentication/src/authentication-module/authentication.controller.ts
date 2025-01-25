@@ -9,9 +9,9 @@ import { fillDto } from '@project/shared-helpers';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { MongoIdValidationPipe } from '@project/shared-pipes';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { NotifyService } from '@project/account-notify';
 import { JwtRefreshGuard } from '../guards/jwt-refresh.guard';
 import { RequestWithTokenPayload } from './request-with-token-payload.interface';
+import { NotifyService } from '@project/notification';
 @Controller('auth')
 export class AuthenticationController {
   constructor(

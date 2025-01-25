@@ -5,9 +5,7 @@ import { NotifyConfigModule } from './notify-config.module';
 import { EmailSubscriberModule } from '@project/notification';
 @Module({
   imports: [
-    MongooseModule.forRootAsync(
-      getMongooseOptions('application.db')
-    ),
+    MongooseModule.forRootAsync(getMongooseOptions('db')),
     NotifyConfigModule,
     EmailSubscriberModule,
   ],

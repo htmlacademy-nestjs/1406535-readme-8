@@ -1,7 +1,6 @@
 import 'multer';
 import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
-import { MediaConfig } from '@project/media-config';
 import { join } from 'node:path';
 import { ensureDir } from 'fs-extra';
 import { writeFile } from 'node:fs/promises';
@@ -12,6 +11,7 @@ import { extension } from 'mime-types';
 import { FileUploaderRepository } from './file-uploader.repository';
 import { FileUploaderEntity } from './file-uploader.entity';
 import { FileUploaderFactory } from './file-uploader.factory';
+import { MediaConfig } from '@project/shared-configurations';
 
 const DATE_FORMAT = 'YYYY MM';
 @Injectable()

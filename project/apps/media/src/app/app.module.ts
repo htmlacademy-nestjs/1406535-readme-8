@@ -6,13 +6,11 @@ import { FileUploaderModule } from '@project/file-uploader';
 
 @Module({
   imports: [
-    MongooseModule.forRootAsync(
-      getMongooseOptions('application.db')
-    ),
+    MongooseModule.forRootAsync(getMongooseOptions('db')),
     FileUploaderModule,
     MediaConfigModule,
   ],
-    controllers: [],
+  controllers: [],
   providers: [],
 })
 export class AppModule {}

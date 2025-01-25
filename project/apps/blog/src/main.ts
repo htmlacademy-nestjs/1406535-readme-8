@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Default } from '@project/shared-types';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,7 +23,9 @@ async function bootstrap() {
     transform: true,
   }));
 
-  const port = process.env.PORT || Default.DefaultPort;
+  const configService = app.get(ConfigService);
+  const port = configService.get('application.port');
+
   await app.listen(port);
   Logger.log(`🚀 Application is running on: http://localhost:${port}/${Default.GlobalPrefix}`);
 }
