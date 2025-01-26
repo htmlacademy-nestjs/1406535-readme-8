@@ -23,6 +23,7 @@ export class UserEntity extends Entity implements StorableEntity<AuthUser> {
     this.email = user.email;
     this.fullName = user.fullName;
     this.avatar = user.avatar ?? undefined;
+    this.passwordHash = user.passwordHash;
   }
 
   public toPOJO(): AuthUser {

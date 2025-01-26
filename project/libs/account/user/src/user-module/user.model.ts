@@ -4,7 +4,7 @@ import { AuthUser } from '@project/shared-types';
 
 @Schema({
   collection: 'users',
-  timestamps: true
+  timestamps: true,
 })
 export class UserModel extends Document implements AuthUser {
   @Prop({ required: true, unique: true })
@@ -20,13 +20,7 @@ export class UserModel extends Document implements AuthUser {
   public avatar: string;
 
   @Prop()
-  public posts: string[];
-
-  @Prop()
   public subscribers: string[];
-
-  @Prop()
-  public id?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(UserModel);

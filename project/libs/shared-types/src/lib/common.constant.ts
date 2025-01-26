@@ -25,6 +25,7 @@ export const ApiResponseMessage = {
   FileUploadError: 'File saving fail',
   FileNotFound: 'File not found',
   TokenNotFound: 'Token does not exists',
+  UpdateTokerPair: 'Get a new access/refresh tokens',
 } as const;
 
 export const SortDirection = {

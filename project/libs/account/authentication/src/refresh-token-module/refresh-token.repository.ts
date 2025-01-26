@@ -10,9 +10,9 @@ import { Model } from 'mongoose';
 export class RefreshTokenRepository extends BaseMongoRepository<RefreshTokenEntity, RefreshTokenModel> {
   constructor(
     entityFactory: RefreshTokenFactory,
-    @InjectModel(RefreshTokenModel.name) blogUserModel: Model<RefreshTokenModel>
+    @InjectModel(RefreshTokenModel.name) userModel: Model<RefreshTokenModel>
     ) {
-    super(entityFactory, blogUserModel);
+    super(entityFactory, userModel);
   }
 
   public async deleteByTokenId(tokenId: string) {

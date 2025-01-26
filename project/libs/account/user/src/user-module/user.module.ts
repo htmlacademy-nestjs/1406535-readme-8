@@ -11,7 +11,7 @@ import { UserModel, UserSchema } from './user.model';
   ],
   providers: [
     UserRepository,
-    UserFactory
+    UserFactory,
   ],
   exports: [UserRepository],
 })

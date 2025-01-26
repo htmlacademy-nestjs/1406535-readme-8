@@ -33,5 +33,5 @@ export class CreateUserDto {
   @IsString()
   @Matches(IMAGES_TYPES)
   @IsOptional()
-  public avatar: string;
+  public avatar?: string;
 }

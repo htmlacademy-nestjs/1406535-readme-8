@@ -13,11 +13,11 @@ import { NotifyModule } from '@project/notification';
 
 @Module({
   imports: [
-    UserModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: getJwtOptions,
     }),
+    UserModule,
     NotifyModule,
     RefreshTokenModule,
   ],

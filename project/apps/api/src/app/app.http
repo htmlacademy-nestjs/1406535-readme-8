@@ -1,26 +1,39 @@
+# Create a new user
+POST http://localhost:3000/api/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "noone@myspace.com",
+  "fullName": "John Doe",
+  "password": "anonimus1"
+}
+
+###
+
 # Login user by email and password
 POST http://localhost:3000/api/users/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "user@notfound.local",
-  "password": "123456"
+  "email": "johndoe@myspace.com",
+  "password": "anonimus1"
 }
 
 ###
 
 # Get new JWT pair
 POST http://localhost:3000/api/users/refresh HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIiLCJlbWFpbCI6InVzZXJAbm90Zm91bmQubG9jYWwiLCJyb2xlIjoidXNlciIsImxhc3RuYW1lIjoiU21pdGgiLCJmaXJzdG5hbWUiOiJLZWtzIiwidG9rZW5JZCI6IjBiMzk0NDA1LWM0ZTQtNGRmMy04NGNjLTg4ZTI5YTRiOGJkZiIsImlhdCI6MTcxNDY2NDEwOSwiZXhwIjoxNzE3MjU2MTA5fQ.A_-yL6zgW1H6VJbfMzXpQvJnK5flYjpwYOZiCxybnio
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2Nzk2MWIyZjMzYmE4NjE4ZTFhOWRiNDYiLCJlbWFpbCI6ImpvaG5kb2VAbXlzcGFjZS5jb20iLCJmdWxsTmFtZSI6IkpvaG4gRG9lIiwidG9rZW5JZCI6IjZkZmEyMmQyLWZmZDgtNDc3Ny1iZDMzLTA4NDU3NmZlM2RkMCIsImlhdCI6MTczNzg5MzkyMiwiZXhwIjoxNzQwNDg1OTIyfQ.yJONXWcPTmqSDBpgE7Kq-8wXfcapH1_mUJI0O8a9NI0
 
 ###
 
 # Create new post
 POST http://localhost:3000/api/posts/ HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2Nzk2MWIyZjMzYmE4NjE4ZTFhOWRiNDYiLCJlbWFpbCI6ImpvaG5kb2VAbXlzcGFjZS5jb20iLCJmdWxsTmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNzM3ODkzOTQ0LCJleHAiOjE3Mzc4OTQyNDR9.tueMp-mA2Sav6MeXOOjvPufH1wo_g2KWyVqYxz6kDAc
 
 {
-  "userId": "676428b948541ea480d114fb",
+  "userId": "67961a06c890082027ebcd76",
   "type": "QUOTA",
   "quotaAuthor": "Jack London",
   "quotaText": "Real purpose of the person — to live, instead of to exist",

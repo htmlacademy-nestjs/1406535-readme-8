@@ -1,5 +1,5 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Req, UseGuards } from '@nestjs/common';
-import { ApiInternalServerErrorResponse, ApiResponse } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { ApiConflictResponse, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
 import { AuthenticationService } from './authentication.service';
 import { LoggedUserRdo } from '../rdo/logged-user.rdo';
 import { ApiResponseMessage } from '@project/shared-types';
@@ -12,11 +12,13 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { JwtRefreshGuard } from '../guards/jwt-refresh.guard';
 import { RequestWithTokenPayload } from './request-with-token-payload.interface';
 import { NotifyService } from '@project/notification';
+import { UserRdo } from '../rdo/user.rdo';
+import { DetailUserRdo } from '../rdo/detail-user.rdo';
 @Controller('auth')
 export class AuthenticationController {
   constructor(
     private readonly authService: AuthenticationService,
-    private readonly notifyService: NotifyService
+    private readonly notifyService: NotifyService,
   ) {}
 
   @ApiResponse({
@@ -33,36 +35,34 @@ export class AuthenticationController {
   @Post('login')
   public async login(@Req() { user }: RequestWithUser) {
     const userToken = await this.authService.createUserToken(user);
+
     return fillDto(LoggedUserRdo, { ...user.toPOJO(), ...userToken });
   }
 
-  // @ApiCreatedResponse({ type: UserRdo, description: ApiResponseMessage.UserCreated })
-  // @ApiConflictResponse({ description: ApiResponseMessage.UserExist })
-  // @ApiInternalServerErrorResponse({ description: ApiResponseMessage.ServerError })
+  @ApiCreatedResponse({ type: UserRdo, description: ApiResponseMessage.UserCreated })
+  @ApiConflictResponse({ description: ApiResponseMessage.UserExist })
+  @ApiInternalServerErrorResponse({ description: ApiResponseMessage.ServerError })
   @Post('register')
   public async create(@Body() dto: CreateUserDto) {
     const newUser = await this.authService.register(dto);
     await this.notifyService.registerSubscriber({ email: dto.email, fullName: dto.fullName });
+
     return newUser.toPOJO();
   }
 
-  // @ApiOkResponse({ type: DetailUserRdo, description: ApiResponseMessage.UserExist })
-  // @ApiNotFoundResponse( { description: ApiResponseMessage.UserNotFound })
-  // @ApiInternalServerErrorResponse({ description: ApiResponseMessage.ServerError })
-  @UseGuards(JwtAuthGuard)
+  @ApiOkResponse({ type: DetailUserRdo, description: ApiResponseMessage.UserExist })
+  @ApiNotFoundResponse( { description: ApiResponseMessage.UserNotFound })
+  @ApiInternalServerErrorResponse({ description: ApiResponseMessage.ServerError })
   @Get(':id')
   public async show(@Param('id', MongoIdValidationPipe) id: string) {
     const existUser = await this.authService.getUserById(id);
     return existUser.toPOJO();
   }
 
+  @HttpCode(HttpStatus.OK)
+  @ApiOkResponse( { description: ApiResponseMessage.UpdateTokerPair })
   @UseGuards(JwtRefreshGuard)
   @Post('refresh')
-  // @HttpCode(HttpStatus.OK)
-  // @ApiResponse({
-  //   status: HttpStatus.OK,
-  //   description: 'Get a new access/refresh tokens'
-  // })
   public async refreshToken(@Req() { user }: RequestWithUser) {
     return this.authService.createUserToken(user);
   }

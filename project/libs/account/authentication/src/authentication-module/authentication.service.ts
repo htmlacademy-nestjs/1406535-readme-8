@@ -81,6 +81,7 @@ export class AuthenticationService {
         secret: this.jwtOptions.refreshTokenSecret,
         expiresIn: this.jwtOptions.refreshTokenExpiresIn
       });
+
       return { accessToken, refreshToken };
     } catch (error) {
       this.logger.error('[${ApiResponseMessage.TokenGenerationError}]: ' + error.message);

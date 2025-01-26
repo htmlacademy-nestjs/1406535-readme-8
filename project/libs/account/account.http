@@ -1,0 +1,40 @@
+# Create a new user
+POST http://localhost:3010/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "someone@myspace.com",
+  "fullName": "John Doe",
+  "password": "anonimus1"
+}
+
+###
+
+# Get user by ID
+GET http://localhost:3010/api/auth/6793975e6fd77d1222557d3d HTTP/1.1
+
+###
+
+# Login user by email and password
+POST http://localhost:3010/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "someone@myspace.com",
+  "password": "anonimus1"
+}
+
+###
+
+# Get new JWT pair
+POST http://localhost:3010/api/auth/refresh HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2Nzk2MjZmMzFlNmZlNzllOWZlNjNhZTUiLCJlbWFpbCI6InNvbWVvbmVAbXlzcGFjZS5jb20iLCJmdWxsTmFtZSI6IkpvaG4gRG9lIiwidG9rZW5JZCI6ImY4MzRkMzc0LTllZDMtNGFhNS1iNTgwLWZhY2E2ZWYzMjQ3OCIsImlhdCI6MTczNzg5MzYzNywiZXhwIjoxNzQwNDg1NjM3fQ._de-fg6CGU4WGyhmjmhCVUQH8sKFk8RqDmmId8S0b7g
+
+###
+
+
+# Check user token
+POST http://localhost:3010/api/auth/check HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2Nzk2MjZmMzFlNmZlNzllOWZlNjNhZTUiLCJlbWFpbCI6InNvbWVvbmVAbXlzcGFjZS5jb20iLCJmdWxsTmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNzM3ODkzNjc0LCJleHAiOjE3Mzc4OTM5NzR9.vvkp4--XYyxuLBdz0inNiSlP9CargmLsIgmVWq7-HiI
+
+###

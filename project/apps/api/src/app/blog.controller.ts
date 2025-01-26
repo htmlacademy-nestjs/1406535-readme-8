@@ -9,7 +9,6 @@ import { ApplicationServiceURL } from '@project/shared-types';
 @Controller('blog')
 @UseFilters(AxiosExceptionFilter)
 export class BlogController {
-
   constructor(
     private readonly httpService: HttpService,
   ) {}

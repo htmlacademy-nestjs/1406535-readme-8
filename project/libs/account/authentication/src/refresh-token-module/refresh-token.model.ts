@@ -4,7 +4,7 @@ import { JwtToken } from '@project/shared-types';
 
 @Schema({
   collection: 'refresh-sessions',
-  timestamps: true
+  timestamps: true,
 })
 export class RefreshTokenModel extends Document implements JwtToken {
   @Prop()
