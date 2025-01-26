@@ -5,7 +5,7 @@ import { MailService } from './mail.service';
 
 @Module({
   imports: [
-    MailerModule.forRootAsync(getMailerAsyncOptions('application.mail')),
+    MailerModule.forRootAsync(getMailerAsyncOptions('mail')),
   ],
   providers: [MailService],
   exports: [MailService]

@@ -2,7 +2,7 @@ import { CallHandler, ExecutionContext, Logger, NestInterceptor } from '@nestjs/
 import { Observable } from 'rxjs';
 
 export class RequestIdInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
+  public intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     const requestId = crypto.randomUUID();
 
     const request = context.switchToHttp().getRequest<Request>();
