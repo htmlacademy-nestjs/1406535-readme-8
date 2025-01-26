@@ -2,7 +2,7 @@ import { Body, Controller, Post, UseFilters, UseGuards, UseInterceptors } from '
 import { AxiosExceptionFilter } from './filters/axios-exception.filter';
 import { HttpService } from '@nestjs/axios';
 import { CheckAuthGuard } from './guards/check-auth.guard';
-import { InjectUserIdInterceptor, RequestIdInterceptor } from '@project/shared-interceptors';
+import { InjectUserIdInterceptor } from '@project/shared-interceptors';
 import { CreatePostDto } from '@project/blog-post';
 import { ApplicationServiceURL } from '@project/shared-types';
 import { ApiBearerAuth } from '@nestjs/swagger';
@@ -16,7 +16,7 @@ export class BlogController {
 
   @ApiBearerAuth('accessToken')
   @UseGuards(CheckAuthGuard)
-  @UseInterceptors(RequestIdInterceptor, InjectUserIdInterceptor)
+  @UseInterceptors(InjectUserIdInterceptor)
   @Post('/')
   public async create(@Body() dto: CreatePostDto) {
     const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceURL.Posts}/`, dto);
