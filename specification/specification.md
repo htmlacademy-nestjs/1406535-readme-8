@@ -8,8 +8,13 @@
 
 - Установить зависимости:
 
-1. `cd ./project`
-2. `npm install`
+```
+cd ./project
+```
+
+```
+npm install
+```
 
 - Создать файлы `.env` на основе `.env-example` в папках `apps/account, apps/api, apps/blog, apps/media, apps/notify, libs/blog/models/prisma`
 
