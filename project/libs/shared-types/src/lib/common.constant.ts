@@ -75,12 +75,6 @@ export const PostTypes = {
   Link: 'LINK',
 } as const;
 
-export const SortType = {
-  Date: 'time',
-  Favorite: 'like',
-  Discussed: 'comment',
-} as const;
-
 export const RabbitRouting = {
   AddSubscriber: 'notify.addSubscriber',
 } as const;
@@ -95,4 +89,11 @@ export const ApplicationServiceURL = {
   Users: 'http://localhost:3010/api/auth',
   Posts: 'http://localhost:3020/api/posts',
   Comments: 'http://localhost:3020/api/comments',
+} as const;
+
+export const SortType = {
+  Published: 'updatedAt',
+  Created: 'createdAt',
+  Comments: 'comments',
+  Likes: 'likes',
 } as const;

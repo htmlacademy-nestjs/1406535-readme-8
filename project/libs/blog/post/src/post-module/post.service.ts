@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { PrismaClientService } from '@project/blog-models';
-import { ApiResponseMessage, PaginationResult, Post, PostTypes, Status } from '@project/shared-types';
+import { ApiResponseMessage, PaginationResult, Post, PostTypes, SortType, Status } from '@project/shared-types';
 import { Prisma } from '@prisma/client';
 import { PostQuery } from './post.query';
 import { CreatePostDto } from '../dto/create-post.dto';
@@ -29,6 +29,17 @@ export class PostService {
         return JSON.stringify({ title: dto.videoTitle, url: dto.videoUrl });
       default:
         throw new BadRequestException(ApiResponseMessage.BadData);
+    }
+  }
+
+  private checkStatus(status: string) {
+    switch (status) {
+      case Status.Draft:
+        return false;
+      case Status.All:
+        return undefined;
+      case Status.Published:
+        return true;
     }
   }
 
@@ -76,22 +87,17 @@ export class PostService {
     const where: Prisma.PostWhereInput = {};
     const orderBy: Prisma.PostOrderByWithRelationInput = {};
 
-    if (query?.status) {
-      switch (query.status) {
-        case Status.Draft:
-          where.published = false;
-          break;
-        case Status.All:
-          where.published = undefined;
-          break;
-        case Status.Published:
-        default:
-          where.published = true;
-      }
-    }
+    where.published = this.checkStatus(query.status);
 
-    if (query?.sortDirection) {
-      orderBy.updatedAt = query.sortDirection;
+    switch (query.sortType) {
+      case SortType.Created:
+      case SortType.Published:
+        orderBy[query.sortType] = query.sortDirection;
+        break;
+      case SortType.Likes:
+      case SortType.Comments:
+        orderBy[query.sortType] = { _count: query.sortDirection };
+        break;
     }
 
     if (query?.type) {
