@@ -1,16 +1,55 @@
-# Create new post
+# Create new post (qouta)
 POST http://localhost:3020/api/posts/ HTTP/1.1
 Content-Type: application/json
 
 {
-  "userId": "676428b948541ea480d114fb",
+  "userId": "6798b06010b4fa31970d79fd",
   "type": "QUOTA",
-  "quotaAuthor": "Jack London",
-  "quotaText": "Real purpose of the person — to live, instead of to exist",
-  "tags": ["life", "love"]
+  "quotaAuthor": "Albert Einstein",
+  "quotaText": "Only two things are infinite — the universe and human stupidity, and I'm not sure about the former."
+}
+###
+
+# Create new post (text)
+POST http://localhost:3020/api/posts/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": "6798b06010b4fa31970d79fd",
+  "type": "TEXT",
+  "textTitle": "Were the Maya right: 'Are we going to die?'",
+  "textDescription": "The article examines the beliefs of the Maya people that have survived to the present day.",
+  "textContent": "Absolutely all great civilizations leave prophecies and prescriptions to their descendants. Maya, as one of the most famous ancient ones, was no exception. Surprisingly, the Maya predicted many dates on which many important events for humanity were to take place. If great human minds have correctly deciphered the prophecies of the Maya, then people should meet the New Era on their way. But there is a fear that a New Era will come along with many natural disasters that will affect the whole world."
 }
 
 ###
+
+# Create new post (link)
+POST http://localhost:3020/api/posts/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": "6798b06010b4fa31970d79fd",
+  "type": "LINK",
+  "linkUrl": "https://ya.ru/",
+  "linkDescription": "Advanced multilingual search engine"
+}
+
+###
+
+# Create new post (video)
+POST http://localhost:3020/api/posts/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": "6798b06010b4fa31970d79fd",
+  "type": "video",
+  "videoTitle": "Funny cats sliping and playing",
+  "videoUrl": "https://www.youtube.com/watch?v=F6va6tg62qg"
+}
+
+###
+
 
 # Get all posts
 # You will get latest 25 (or less) published post in page by default
@@ -47,6 +86,11 @@ GET http://localhost:3020/api/posts?status=published HTTP/1.1
 
 # Get post by tag
 GET http://localhost:3020/api/posts?tag=life HTTP/1.1
+
+###
+
+# Get post by userId
+GET http://localhost:3020/api/posts?author=6798b06010b4fa31970d79fd HTTP/1.1
 
 ###
 

@@ -35,4 +35,8 @@ export class PostQuery extends PaginationQuery {
   @IsIn(Object.values(SortType))
   @IsOptional()
   sortType: (typeof SortType)[keyof typeof SortType] = SortType.Published;
+
+  @IsMongoId()
+  @IsOptional()
+  userId: string;
 }

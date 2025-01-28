@@ -105,6 +105,10 @@ export class PostService {
       where.type = query.type;
     }
 
+    if (query?.author) {
+      where.userId = query.author;
+    }
+
     const [records, count] = await Promise.all([
       this.blogService.post.findMany({ where, orderBy, skip, take, include: REFINEMENTS }),
       this.сountAll(where),
