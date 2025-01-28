@@ -29,9 +29,18 @@ cp libs/blog/models/prisma/.env-example libs/blog/models/prisma/.env
 ```
 
 - Запустить docker.desktop
-- Запустить docker-контейнеры с БД: `npm run db:start`
-- Остановить docker-контейнеры и удалить volumes можно командой `npm run db:stop`
-- Запустить сервисы командой `npm run app:start`
+- Запустить docker-контейнеры с БД:
+
+```
+npm run db:start
+```
+
+- Остановить docker-контейнеры и удалить volumes можно командой: `npm run db:stop`
+- Запустить сервисы командой:
+
+```
+npm run app:start
+```
 
 _API Gateway (apps/api) является единой точкой входа. Примеры запросов приведены в файле apps/app.http_
 
