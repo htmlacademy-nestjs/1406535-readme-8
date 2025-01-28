@@ -89,15 +89,16 @@ export class PostService {
 
     where.published = this.checkStatus(query.status);
 
-    switch (query.sortType) {
-      case SortType.Created:
-      case SortType.Published:
-        orderBy[query.sortType] = query.sortDirection;
-        break;
-      case SortType.Likes:
-      case SortType.Comments:
-        orderBy[query.sortType] = { _count: query.sortDirection };
-        break;
+    if (query.sortType === SortType.Created || query.sortType === SortType.Published) {
+      orderBy[query.sortType] = query.sortDirection;
+    } else {
+      orderBy[query.sortType] = { _count: query.sortDirection };
+    }
+
+    if (query?.tag) {
+      where.tags = {
+        some: { name: query.tag }
+      };
     }
 
     if (query?.type) {
