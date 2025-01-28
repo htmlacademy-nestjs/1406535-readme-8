@@ -42,7 +42,9 @@ npm run db:start
 npm run app:start
 ```
 
-**_API Gateway (apps/api) является единой точкой входа. Примеры запросов приведены в файле apps/app.http_**
+<hr>
+**_API Gateway (apps/api) является единой точкой входа. Примеры запросов приведены в файле apps/app.http._**
+<hr>
 
 ### Переменные окружения
 
@@ -100,8 +102,9 @@ npm run app:start
 - JWT_ACCESS_TOKEN_EXPIRES_IN - время жизни ACCESS_TOKEN
 - JWT_REFRESH_TOKEN_SECRET - секретный ключ REFRESH_TOKEN
 - JWT_REFRESH_TOKEN_EXPIRES_IN - время жизни REFRESH_TOKEN
-
-**_Доступ к API можно получить через Swagger по адресу: `http://localhost:3000/spec`_**
+<hr>
+**_Доступ к документации можно получить через Swagger по адресу: `http://localhost:3000/spec.`_**
+<hr>
 
 ## Схема проекта
 
