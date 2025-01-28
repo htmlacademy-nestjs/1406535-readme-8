@@ -28,6 +28,8 @@ cp libs/blog/models/prisma/.env-example libs/blog/models/prisma/.env
 - Остановить docker-контейнеры и удалить volumes можно командой `npm run db:stop`
 - Запустить сервисы командой `npm run app:start`
 
+_API Gateway (apps/api) является единой точкой входа. Примеры запросов приведены в файле apps/app.http_
+
 ## Переменные окружения
 
 ### Общие переменные
@@ -85,7 +87,7 @@ cp libs/blog/models/prisma/.env-example libs/blog/models/prisma/.env
 - JWT_REFRESH_TOKEN_SECRET - секретный ключ REFRESH_TOKEN
 - JWT_REFRESH_TOKEN_EXPIRES_IN - время жизни REFRESH_TOKEN
 
-# Доступ к API можно получить через Swagger по адресу: `http://localhost:3000/api/spec`
+# Доступ к API можно получить через Swagger по адресу: `http://localhost:3000/spec`
 
 # Схема проекта
 
