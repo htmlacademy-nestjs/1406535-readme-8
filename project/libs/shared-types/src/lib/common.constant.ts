@@ -27,6 +27,7 @@ export const ApiResponseMessage = {
   TokenNotFound: 'Token does not exists',
   UpdateTokerPair: 'Return a new pair - access/refresh tokens',
   UnauthorizedOnly: 'Only for new users',
+  AlreadyReposted: 'You can repost just once',
 } as const;
 
 export const SortDirection = {
