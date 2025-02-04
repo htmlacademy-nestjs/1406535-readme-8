@@ -14,6 +14,7 @@ import { RequestWithTokenPayload } from './request-with-token-payload.interface'
 import { NotifyService } from '@project/notification';
 import { UserRdo } from '../rdo/user.rdo';
 import { DetailUserRdo } from '../rdo/detail-user.rdo';
+import { UpdateUserPassRdo } from '../dto/update-user-pass.dto';
 @Controller('auth')
 export class AuthenticationController {
   constructor(
@@ -72,5 +73,12 @@ export class AuthenticationController {
   @Post('check')
   public async checkToken(@Req() { user: payload }: RequestWithTokenPayload) {
     return payload;
+  }
+
+  @Post('update')
+  public async update(@Body() dto: UpdateUserPassRdo) {
+    const updatedUser = await this.authService.updateUserPassword(dto);
+
+    return fillDto(UserRdo, updatedUser.toPOJO());
   }
 }
