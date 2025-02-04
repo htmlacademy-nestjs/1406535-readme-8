@@ -1,7 +1,7 @@
 import { compare, genSalt, hash } from 'bcrypt';
 import { AuthUser, Entity, StorableEntity } from '@project/shared-types';
-import { SALT_ROUNDS } from './user.constant';
 
+export const SALT_ROUNDS = 10;
 export class UserEntity extends Entity implements StorableEntity<AuthUser> {
   public email: string;
   public fullName: string;
@@ -23,6 +23,7 @@ export class UserEntity extends Entity implements StorableEntity<AuthUser> {
     this.email = user.email;
     this.fullName = user.fullName;
     this.avatar = user.avatar ?? undefined;
+    this.passwordHash = user.passwordHash;
   }
 
   public toPOJO(): AuthUser {

@@ -22,6 +22,7 @@ export class CreatePostDto {
     description: 'One of post type: video, text, link, quota, photo',
     example: 'VIDEO'
   })
+  @Transform(({ value }) => value.toUpperCase())
   @IsIn(Object.values(PostTypes))
   public type: (typeof PostTypes)[keyof typeof PostTypes];
 

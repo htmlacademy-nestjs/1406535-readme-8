@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { EmailSubscriberModule } from '@project/email-subscriber';
-import { NotifyConfigModule } from '@project/notify-config';
 import { getMongooseOptions } from '@project/shared-helpers';
+import { NotifyConfigModule } from './notify-config.module';
+import { EmailSubscriberModule } from '@project/notification';
 @Module({
   imports: [
-    MongooseModule.forRootAsync(
-      getMongooseOptions('application.db')
-    ),
+    MongooseModule.forRootAsync(getMongooseOptions('db')),
     NotifyConfigModule,
     EmailSubscriberModule,
   ],

@@ -52,6 +52,13 @@ export class PostRdo {
   public updatedAt: Date;
 
   @ApiProperty({
+    description: 'Created date',
+    example: '2024-12-19T12:23:50'
+  })
+  @Expose()
+  public createdAt: Date;
+
+  @ApiProperty({
     description: 'Content object (depends on post.type)',
     example: 'videoTitle: Funny cats, videoUrl: https://www.youtube.com/watch?v=F6va6tg62qg'
   })
