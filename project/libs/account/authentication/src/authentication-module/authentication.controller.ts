@@ -47,7 +47,7 @@ export class AuthenticationController {
     const newUser = await this.authService.register(dto);
     await this.notifyService.registerSubscriber({ email: dto.email, fullName: dto.fullName });
 
-    return newUser.toPOJO();
+    return fillDto(UserRdo, newUser.toPOJO());
   }
 
   @ApiOkResponse({ type: DetailUserRdo, description: ApiResponseMessage.UserExist })
@@ -56,7 +56,8 @@ export class AuthenticationController {
   @Get(':id')
   public async show(@Param('id', MongoIdValidationPipe) id: string) {
     const existUser = await this.authService.getUserById(id);
-    return existUser.toPOJO();
+
+    return fillDto(DetailUserRdo, existUser.toPOJO());
   }
 
   @HttpCode(HttpStatus.OK)

@@ -1,10 +1,10 @@
 import { HttpService } from '@nestjs/axios';
-import { Body, Controller, ForbiddenException, Post, Req, UseFilters, UseGuards } from '@nestjs/common';
-import { CreateUserDto, LoggedUserRdo, LoginUserDto, TokenPairRdo, UserRdo } from '@project/authentication';
+import { Body, Controller, Get, Param, Post, Req, UseFilters } from '@nestjs/common';
+import { CreateUserDto, DetailUserRdo, LoggedUserRdo, LoginUserDto, TokenPairRdo, UserRdo } from '@project/authentication';
 import { AxiosExceptionFilter } from './filters/axios-exception.filter';
 import { ApiResponseMessage, ApplicationServiceURL } from '@project/shared-types';
-import { ApiBadRequestResponse, ApiBearerAuth, ApiConflictResponse, ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
-import { CheckAuthGuard } from './guards/check-auth.guard';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiConflictResponse, ApiCreatedResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { MongoIdValidationPipe } from '@project/shared-pipes';
 
 @Controller('users')
 @UseFilters(AxiosExceptionFilter)
@@ -42,6 +42,16 @@ export class UsersController {
   @Post('register')
   public async register(@Body() createUserDto: CreateUserDto) {
     const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceURL.Users}/register`, createUserDto);
+
+    return data;
+  }
+
+  @ApiOkResponse({ type: DetailUserRdo, description: ApiResponseMessage.UserExist })
+  @ApiNotFoundResponse({ description: ApiResponseMessage.UserNotFound })
+  @ApiBadRequestResponse({ description: ApiResponseMessage.InvalidID })
+  @Get(':id')
+  public async show(@Param('id', MongoIdValidationPipe) id: string) {
+    const { data } = await this.httpService.axiosRef.get(`${ApplicationServiceURL.Users}/${id}`);
 
     return data;
   }
