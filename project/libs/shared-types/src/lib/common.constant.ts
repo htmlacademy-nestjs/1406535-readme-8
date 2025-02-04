@@ -26,6 +26,7 @@ export const ApiResponseMessage = {
   FileNotFound: 'File not found',
   TokenNotFound: 'Token does not exists',
   UpdateTokerPair: 'Return a new pair - access/refresh tokens',
+  UnauthorizedOnly: 'Only for new users',
 } as const;
 
 export const SortDirection = {
