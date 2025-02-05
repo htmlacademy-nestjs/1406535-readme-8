@@ -1,0 +1,13 @@
+# Создание нового поста
+POST http://localhost:3000/api/posts HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2EyMmViZmNlNTZhNTI3ZjYxZTkzOGEiLCJlbWFpbCI6InRlc3RAeWFob28uY29tIiwiZnVsbE5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODY4MjEzOCwiZXhwIjoxNzM4NjgyNDM4fQ.LchDi4Kwvfh_2YyN_FNKQ3epK4MVoqp__MNYMSsNRNE
+
+{
+  "type": "QUOTA",
+  "quotaAuthor": "Jack London",
+  "quotaText": "Real purpose of the person — to live, instead of to exist",
+  "tags": ["one", "two"]
+}
+
+###

@@ -44,7 +44,7 @@ npm run app:start
 
 <hr>
 
-**_API Gateway (apps/api) является единой точкой входа. Примеры запросов приведены в файле apps/app.http._**
+**_API Gateway (apps/api) является единой точкой входа. Примеры запросов приведены в файлах app-users.http, app-posts.http, app-comments.http (папка apps/api/src/app)_**
 
 <hr>
 
