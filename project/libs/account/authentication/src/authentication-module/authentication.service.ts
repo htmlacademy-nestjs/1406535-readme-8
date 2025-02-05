@@ -31,7 +31,7 @@ export class AuthenticationService {
 
     const user = { email, fullName, avatar, passwordHash: '' };
     const userEntity = await new UserEntity(user).setPassword(password);
-    this.userRepository.save(userEntity);
+    await this.userRepository.save(userEntity);
 
     return userEntity;
   }
