@@ -4,4 +4,5 @@ export interface User {
   fullName: string;
   avatar?: string;
   subscribers?: string[];
+  createdAt?: Date;
 }

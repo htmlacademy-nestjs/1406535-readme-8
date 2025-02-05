@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsOptional, IsString, Length, Matches } from 'class-validator';
+import { IsEmail, IsMongoId, IsOptional, IsString, Length, Matches } from 'class-validator';
 
-const IMAGES_TYPES = /\.(gif|jpe?g|png|webp|bmp)$/i;
+const IMAGES_TYPES = /\.(gif|jpeg|jpg|png|webp|bmp)$/i;
 export class CreateUserDto {
   @ApiProperty({
     description: 'User email address',
@@ -27,11 +27,10 @@ export class CreateUserDto {
   public password: string;
 
   @ApiProperty({
-    description: 'User avatar (optional)',
-    example: '/images/user.png'
+    description: 'User avatar ID (optional)',
+    example: '67865f49e29de26ecff7e44a'
   })
-  @IsString()
-  @Matches(IMAGES_TYPES)
+  @IsMongoId()
   @IsOptional()
   public avatar?: string;
 }

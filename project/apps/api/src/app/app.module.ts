@@ -1,11 +1,11 @@
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import { UsersController } from './users.controller';
 import { CheckAuthGuard } from './guards/check-auth.guard';
-import { BlogController } from './blog.controller';
 import { ApiConfigModule } from './api-config.module';
 import { getHttpOptions } from '@project/shared-helpers';
 import { ConfigService } from '@nestjs/config';
+import { UsersController } from './controllers/users.controller';
+import { BlogController } from './controllers/blog.controller';
 
 @Module({
   imports: [

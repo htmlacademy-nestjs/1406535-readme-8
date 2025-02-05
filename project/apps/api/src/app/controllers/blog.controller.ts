@@ -1,11 +1,11 @@
 import { Body, Controller, Post, UseFilters, UseGuards, UseInterceptors } from '@nestjs/common';
-import { AxiosExceptionFilter } from './filters/axios-exception.filter';
 import { HttpService } from '@nestjs/axios';
-import { CheckAuthGuard } from './guards/check-auth.guard';
 import { InjectUserIdInterceptor } from '@project/shared-interceptors';
 import { CreatePostDto } from '@project/blog-post';
 import { ApplicationServiceURL } from '@project/shared-types';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { AxiosExceptionFilter } from '../filters/axios-exception.filter';
+import { CheckAuthGuard } from '../guards/check-auth.guard';
 
 @Controller('posts')
 @UseFilters(AxiosExceptionFilter)

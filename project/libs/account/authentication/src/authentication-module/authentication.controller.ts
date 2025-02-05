@@ -14,6 +14,7 @@ import { RequestWithTokenPayload } from './request-with-token-payload.interface'
 import { NotifyService } from '@project/notification';
 import { UserRdo } from '../rdo/user.rdo';
 import { DetailUserRdo } from '../rdo/detail-user.rdo';
+import { UpdateUserPassRdo } from '../dto/update-user-pass.dto';
 @Controller('auth')
 export class AuthenticationController {
   constructor(
@@ -47,7 +48,7 @@ export class AuthenticationController {
     const newUser = await this.authService.register(dto);
     await this.notifyService.registerSubscriber({ email: dto.email, fullName: dto.fullName });
 
-    return newUser.toPOJO();
+    return fillDto(UserRdo, newUser.toPOJO());
   }
 
   @ApiOkResponse({ type: DetailUserRdo, description: ApiResponseMessage.UserExist })
@@ -56,7 +57,8 @@ export class AuthenticationController {
   @Get(':id')
   public async show(@Param('id', MongoIdValidationPipe) id: string) {
     const existUser = await this.authService.getUserById(id);
-    return existUser.toPOJO();
+
+    return fillDto(DetailUserRdo, existUser.toPOJO());
   }
 
   @HttpCode(HttpStatus.OK)
@@ -71,5 +73,12 @@ export class AuthenticationController {
   @Post('check')
   public async checkToken(@Req() { user: payload }: RequestWithTokenPayload) {
     return payload;
+  }
+
+  @Post('update')
+  public async update(@Body() dto: UpdateUserPassRdo) {
+    const updatedUser = await this.authService.updateUserPassword(dto);
+
+    return fillDto(UserRdo, updatedUser.toPOJO());
   }
 }

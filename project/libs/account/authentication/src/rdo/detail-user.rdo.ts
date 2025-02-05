@@ -20,15 +20,15 @@ export class DetailUserRdo {
     description: 'User registration date',
     example: '2016-05-18T16:00:00Z'
   })
-  @Expose({ name: 'createAt'})
-  public registered: Date;
+  @Expose()
+  public createdAt: Date;
 
   @ApiProperty({
     description: 'User\'s published posts quantity',
     example: '5'
   })
   @Expose()
-  @Transform(({ value }) => value.length)
+  @Transform(({ value }) => value?.length || 0)
   public posts: number;
 
   @ApiProperty({
@@ -36,6 +36,6 @@ export class DetailUserRdo {
     example: '5'
   })
   @Expose()
-  @Transform(({ value }) => value.length)
+  @Transform(({ value }) => value?.length || 0)
   public subscribers: number;
 }

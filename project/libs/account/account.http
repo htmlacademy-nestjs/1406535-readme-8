@@ -10,8 +10,20 @@ Content-Type: application/json
 
 ###
 
+# Update user's password
+POST http://localhost:3010/api/auth/update HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": "67a236123dccda2d52fd6199",
+  "oldPassword": "anonimus1",
+  "newPassword": "something"
+}
+
+###
+
 # Get user by ID
-GET http://localhost:3010/api/auth/6793975e6fd77d1222557d3d HTTP/1.1
+GET http://localhost:3010/api/auth/67a22d2a4aa03dd975f2ea7e HTTP/1.1
 
 ###
 
@@ -20,8 +32,8 @@ POST http://localhost:3010/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "someone@myspace.com",
-  "password": "anonimus1"
+  "email": "321@yahoo.com",
+  "password": "something"
 }
 
 ###

@@ -9,14 +9,12 @@ datasource db {
 }
 
 model Post {
-  // При создании будут одинаковы, при репосте изменятся
   id        String     @id @default(uuid())
   originId  String?    @map("origin_id")
   type      Type
   content   Json
   createdAt DateTime   @default(now()) @map("created_at")
   updatedAt DateTime   @updatedAt @map("updated_at")
-  // При создании будут одинаковы, при репосте изменятся
   userId    String     @map("user_id")
   authorId  String?    @map("author_id")
   published Boolean    @default(true)

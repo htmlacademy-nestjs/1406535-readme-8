@@ -66,4 +66,10 @@ export class PostController {
   public async destroy(@Param('id', ParseUUIDPipe) id: string) {
     await this.postService.delete(id);
   }
+
+  @Post(':id/repost')
+  public async repost(@Param('id', ParseUUIDPipe) id: string, @Body() dto: { userId: string }) {
+    const post = await this.postService.repost(dto.userId, id);
+    return fillDto(PostRdo, post);
+  }
 }

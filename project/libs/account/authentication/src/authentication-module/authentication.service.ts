@@ -8,6 +8,7 @@ import { LoginUserDto } from '../dto/login-user.dto';
 import { RefreshTokenService } from '../refresh-token-module/refresh-token.service';
 import { createJWTPayload } from '@project/shared-helpers';
 import { JwtConfig } from '@project/shared-configurations';
+import { UpdateUserPassRdo } from '../dto/update-user-pass.dto';
 
 @Injectable()
 export class AuthenticationService {
@@ -30,7 +31,7 @@ export class AuthenticationService {
 
     const user = { email, fullName, avatar, passwordHash: '' };
     const userEntity = await new UserEntity(user).setPassword(password);
-    this.userRepository.save(userEntity);
+    await this.userRepository.save(userEntity);
 
     return userEntity;
   }
@@ -87,5 +88,16 @@ export class AuthenticationService {
       this.logger.error('[${ApiResponseMessage.TokenGenerationError}]: ' + error.message);
       throw new InternalServerErrorException(ApiResponseMessage.TokenGenerationError);
     }
+  }
+
+  public async updateUserPassword(dto: UpdateUserPassRdo): Promise<UserEntity> {
+    const existUser = await this.getUserById(dto.userId);
+    if (! await existUser.checkPassword(dto.oldPassword)) {
+      throw new InternalServerErrorException(ApiResponseMessage.LoggedError);
+    }
+    await existUser.setPassword(dto.newPassword);
+    this.userRepository.update(existUser);
+
+    return existUser;
   }
 }

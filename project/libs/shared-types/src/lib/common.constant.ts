@@ -27,6 +27,7 @@ export const ApiResponseMessage = {
   TokenNotFound: 'Token does not exists',
   UpdateTokerPair: 'Return a new pair - access/refresh tokens',
   UnauthorizedOnly: 'Only for new users',
+  AlreadyReposted: 'You can repost just once',
 } as const;
 
 export const SortDirection = {
@@ -90,6 +91,7 @@ export const ApplicationServiceURL = {
   Users: 'http://localhost:3010/api/auth',
   Posts: 'http://localhost:3020/api/posts',
   Comments: 'http://localhost:3020/api/comments',
+  Files: 'http://localhost:3030/api/files',
 } as const;
 
 export const SortType = {

@@ -1,0 +1,74 @@
+# Регистрация нового пользователя
+POST http://localhost:3000/api/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "321@yahoo.com",
+  "fullName": "Any Cravetz",
+  "password": "anonimus1"
+}
+
+###
+
+# Регистрация нового пользователя с аватаром
+POST http://localhost:3000/api/users/register HTTP/1.1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="email"
+
+pretty_kitty@yahoo.com
+--boundary
+Content-Disposition: form-data; name="fullName"
+
+PrettyKitty
+--boundary
+Content-Disposition: form-data; name="password"
+
+Secret123
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="some_picture.jpg"
+Content-Type: image/jpeg
+
+< ./app/some_picture.jpg
+--boundary--
+
+###
+
+
+# Cменить пароль
+POST http://localhost:3000/api/users/update HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2EyMzYxMjNkY2NkYTJkNTJmZDYxOTkiLCJlbWFpbCI6IjMyMUB5YWhvby5jb20iLCJmdWxsTmFtZSI6IkFueSBDcmF2ZXR6IiwiaWF0IjoxNzM4Njg5NDkyLCJleHAiOjE3Mzg2ODk3OTJ9.qQbuDaMNp5WnnS11U3UmZ0qHV9TheWsPJ639kMJ2Xew
+
+{
+  "oldPassword": "something",
+  "newPassword": "newone"
+}
+
+###
+
+
+# Получить детальную информацию о пользователе по ID
+GET http://localhost:3000/api/users/67a236123dccda2d52fd6199 HTTP/1.1
+
+###
+
+
+# Авторизация с помощью почты и пароля
+POST http://localhost:3000/api/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "321@yahoo.com",
+  "password": "newone"
+}
+
+###
+
+
+# Получение новой пары JWT ключей
+POST http://localhost:3000/api/users/refresh HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N2EyMmViZmNlNTZhNTI3ZjYxZTkzOGEiLCJlbWFpbCI6InRlc3RAeWFob28uY29tIiwiZnVsbE5hbWUiOiJKb2huIERvZSIsInRva2VuSWQiOiI0NjU1MDdmMC1jNTQ5LTQ2ZjEtYTI2YS1jZjMwMDBmNGM1ODAiLCJpYXQiOjE3Mzg2ODIxMDUsImV4cCI6MTc0MTI3NDEwNX0.ICkxMqr7zl6vkpzA61alpVZIHBm7h1w-l001frG74Lg
+
+###

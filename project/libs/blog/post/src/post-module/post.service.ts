@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { PrismaClientService } from '@project/blog-models';
 import { ApiResponseMessage, PaginationResult, Post, PostTypes, SortType, Status } from '@project/shared-types';
 import { Prisma } from '@prisma/client';
@@ -153,6 +153,37 @@ export class PostService {
   public async delete(id: string): Promise<void> {
     try {
       await this.blogService.post.delete({ where: { id } });
+    } catch {
+      throw new InternalServerErrorException(ApiResponseMessage.ServerError);
+    }
+  }
+
+  public async repost(userId: string, postId: string): Promise<Post> {
+    if (await this.blogService.post.findFirst({ where: { originId: postId, userId, reposted: true } })) {
+      throw new ConflictException(ApiResponseMessage.AlreadyReposted);
+    }
+
+    const existPost = await this.blogService.post.findFirst({ where: { id: postId }});
+
+    try {
+      const newPost = await this.blogService.post.create({
+        data: {
+          type: existPost.type,
+          content: existPost.content,
+          originId: existPost.id,
+          userId,
+          authorId: existPost.userId,
+          reposted: true,
+          comments: {
+            connect: [],
+          },
+          likes: {
+            connect: [],
+          }
+        },
+        include: REFINEMENTS,
+      });
+      return newPost;
     } catch {
       throw new InternalServerErrorException(ApiResponseMessage.ServerError);
     }
